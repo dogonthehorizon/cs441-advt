@@ -36,6 +36,7 @@ cs441GoogleMapsViz.formatInfoWindow = function(displayedArea, information)
 {
 			displayedArea.infoWindowHtml ="";
 	        displayedArea.infoWindowHtml += "<p class='BobDole'>Zip Code:" + information + "</p>";
+
 };
 
     
