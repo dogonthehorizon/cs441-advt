@@ -277,7 +277,7 @@ cs441GoogleMapsViz.regionalize = function(layerArray, geocoder) {
 cs441GoogleMapsViz.initialize = function() {
 
 	// Set the Google API key for this namespace.
-	cs441GoogleMapsViz.apikey = 'Your API key here';
+	cs441GoogleMapsViz.apikey = 'AIzaSyAVPfkJCfgUZceej9MQbUwZIh8_EO8BMU4';
 	
 	// Create the httpRequestor for this namespace.
 	cs441GoogleMapsViz.makeRequestor();
