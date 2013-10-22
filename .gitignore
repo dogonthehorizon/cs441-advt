@@ -10,7 +10,5 @@
 *.shp
 *.shp.xml
 *.shx
-adminData/*.csv
-adminData/auto/
-adminData/.R*
-originalAdmissionsData/
+.project
+.pydevproject
