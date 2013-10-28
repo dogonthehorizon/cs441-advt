@@ -10,6 +10,7 @@ require.config({
     baseUrl: 'public/js',
     paths: {
         'jquery':'vendor/jquery-2.0.3.min',
+        'jquery-ui':'vendor/jquery-ui-1.10.3.custom.min',
         'knockout':'vendor/knockout-2.3.0.min',
         'foundation':'foundation/foundation' //TODO: Remove unused foundation js from project.
     }
@@ -27,8 +28,11 @@ require.config({
 define([
     'jquery',
     'knockout',
-    'foundation'
-], function($, ko){
+    'components/SliderViewModel',
+    'foundation',
+    'jquery-ui'
+], function($, ko, SliderViewModel){
 
     $(document).foundation();
+    ko.applyBindings(new SliderViewModel());
 });
