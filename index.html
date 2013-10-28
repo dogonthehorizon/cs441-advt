@@ -7,6 +7,8 @@
 
   <!-- Project Stylesheet -->
   <link rel="stylesheet" href="public/css/app.css">
+  <!-- jQuery UI CSS styles --><!-- TODO: Incorporate into SCSS sheets. -->
+  <link rel='stylesheet' href='public/css/redmond/jquery-ui-1.10.3.custom.min.css'>
 
   <!-- Project Javascript loaded via RequireJS -->
   <script data-main='public/main' src='public/js/vendor/require-2.1.9.min.js'></script>
@@ -15,20 +17,79 @@
 <body>
     <!-- Filter elements should in here -->
     <div class='row' id='filters'>
-        <div class='large-12 columns'>
-            <div class='panel'>12</div>
-        </div>
+        <form>
+            <fieldset>
+                <legend>ADVT &mdash; Filters</legend>
+
+                <div class='large-12 columns'>
+                    <div class='large-3 columns'>
+                        <div class='row'>
+                            <label>Year of Entry</label>
+                            <input type='number' placeholder='(e.g. 2012)' />
+                        </div>
+                        <div class='row'>
+                            <label>Gender</label>
+                            <input type='radio' value='male' class='radio' /> Male
+                            <input type='radio' value='female' class='radio'/> Female
+                        </div>
+                        <div class='row'>
+                            <label>Application Type</label>
+                            <select name='application-type'>
+                                <option value='app-total'>All</option>
+                                <option value='app-completed'>Completed</option>
+                                <option value='app-accepted'>Accepted</option>
+                                <option value='app-waitlisted'>Waitlisted</option>
+                                <option value='app-deposit'>with Deposit</option>
+                                <option value='app-campus-visit'>with Campus Visitation</option>
+                                <option value='app-avj'>with Admissions Visitation Day (AVJ)</option>
+                                <option value='app-svd'>with Saturday Visit (SVD)</option>
+                                <option value='app-home-fair-visit'>with Hometown College Fair Visitation</option>
+                                <option value='app-home-fair-intro'>with personal introduction at college fair</option>
+                                <option value='app-sneaker'>Sneaker Applications</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class='large-4 columns'>
+                        <div class='row'>
+                            <label>SAT Reading</label>
+                            <div class='large-4 columns'><input type='text' data-bind="value: sliderVal()[0]" /></div>
+                            <div class='large-4 columns'><div data-bind="slider: sliderVal, sliderOptions: {range: true, min:0, max:800, values: [0, 800], step: 1}"></div></div>
+                            <div class='large-4 columns'><input type='text' data-bind="value: sliderVal()[1]" /></div>
+                        </div>
+                        <div class='row'>
+                            <label>SAT Math</label>
+                            <div class='large-4 columns'><input type='text' data-bind="value: sliderVal()[0]" /></div>
+                            <div class='large-4 columns'><div data-bind="slider: sliderVal, sliderOptions: {range: true, min:0, max:800, values: [0, 800], step: 1}"></div></div>
+                            <div class='large-4 columns'><input type='text' data-bind="value: sliderVal()[1]" /></div>
+                        </div>
+                        <div class='row'>
+                            <label>GPA</label>
+                            <div class='large-4 columns'><input type='text' data-bind="value: sliderVal()[0]" /></div>
+                            <div class='large-4 columns'><div data-bind="slider: sliderVal, sliderOptions: {range: true, min:0, max:800, values: [0, 800], step: 1}"></div></div>
+                            <div class='large-4 columns'><input type='text' data-bind="value: sliderVal()[1]" /></div>
+                        </div>
+                    </div>
+                    <div class='large-3 columns'>
+                        <div class='panel'>3</div>
+                    </div>
+                    <div class='large-2 columns'>
+                        <input type='submit' class='button' value='Search' />
+                        <div class='button'>Export</div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
     </div>
 
     <div class='row' >
         <!-- Map elements should go in here -->
-        <div class='large-8 columns' id='map-canvas'>
-            <div class='panel'>8</div>
+        <div class='large-7 columns' id='map-canvas'>
+            <div class='panel'>7</div>
         </div>
 
         <!-- Results elements should go in here -->
-        <div class='large-4 columns' id='results'>
-            <div class='panel'>4</div>
+        <div class='large-5 columns' id='results'>
+            <div class='panel'>5</div>
         </div>
 
     </div>

@@ -12,4 +12,4 @@
 *.shx
 .project
 .pydevproject
-public/css
+public/css/*.css
