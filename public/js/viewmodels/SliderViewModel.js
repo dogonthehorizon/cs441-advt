@@ -8,8 +8,6 @@
  *
  * @depends jquery, knockout
  *
- * TODO: Create sandboxes for these elements, since they all currently
- * share the same observable. This is a Bad Thing (TM).
  */
 define([
     'jquery',
@@ -27,6 +25,7 @@ define([
             // Init the UI element.
             $(element).slider(options);
 
+            // Make the slider values observable
             ko.utils.registerEventHandler(element, 'slide', function(event, ui) {
                 var observable = valueAccessor();
                 observable($(element).slider('values'));
@@ -56,7 +55,9 @@ define([
     return function() {
         var self = this;
 
-        self.sliderVal = ko.observableArray([0,800]); //TODO: This should be moved into a constant or something.
+        self.satReading = ko.observableArray([0,800]); //TODO: This should be moved into a constant or something.
+        self.satMath    = ko.observableArray([0,800]); //TODO: This should be moved into a constant or something.
+        self.GPA        = ko.observableArray([0,800]); //TODO: This should be moved into a constant or something.
 
     };
 });
