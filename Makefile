@@ -2,8 +2,14 @@
 # Author: Fernando Freire
 # Date created: 21 Oct, 2013
 
+# For a description of why this is useful:
+# http://www.gnu.org/software/make/manual/html_node/Phony-Targets.html
+.PHONY: _pwd-prompt decrypt-conf encrypt-conf
+
 CSS-COMPILER=compass
 PYTHON=`which python`
+
+CONF_FILE=conf/settings.txt
 
 init: css-compile
 
@@ -20,3 +26,18 @@ css-watch:
 
 css-compile:
 	$(CSS-COMPILER) compile
+
+
+# API Key Management
+# http://ejohn.org/blog/keeping-passwords-in-source-control
+
+_pwd-prompt:
+	@echo "Contact ffreire.fernando@gmail.com for the password."
+
+decrypt-conf: _pwd-prompt
+	openssl cast5-cbc -d -in $(CONF_FILE).cast5 -out $(CONF_FILE)
+	chmod 600 $(CONF_FILE)
+
+encrypt-conf: _pwd-prompt
+	openssl cast5-cbc -e -in $(CONF_FILE) -out $(CONF_FILE).cast5
+
