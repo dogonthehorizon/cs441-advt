@@ -37,7 +37,8 @@ define([
     'jquery-ui'
 ], function($, ko, SliderViewModel){
 
-
-    $(document).foundation();
-    ko.applyBindings(new SliderViewModel());
-});
+    $(document).ready(function(){
+        $(document).foundation();
+        ko.applyBindings(new SliderViewModel());
+    });  // document.ready
+});  // requirejs

@@ -1,3 +1,18 @@
+// CS441 Data Visualization Variables
+
+$lightGrey: #e5e5e5;
+$shadowGrey: #ccc;
+$white: #fff;
+
+$googleBlue: #4285f4;
+$googleGreen: #0f9d58;
+
+// Styles a button with the given color using Google styling guides.
+@mixin advt-button($color) {
+  @include button($button-med, $color, 3px, false, false, false);
+  border-color: $color;
+}
+
 //
 // Foundation Variables
 //

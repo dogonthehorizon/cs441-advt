@@ -10,6 +10,10 @@
   <!-- jQuery UI CSS styles --><!-- TODO: Incorporate into SCSS sheets. -->
   <link rel='stylesheet' href='public/css/redmond/jquery-ui-1.10.3.custom.min.css'>
 
+  <!-- TypeKit Font Loading -->
+  <script type="text/javascript" src="//use.typekit.net/wwv6qwj.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
   <!-- Project Javascript loaded via RequireJS -->
   <script data-main='public/main' src='public/js/vendor/require-2.1.9.min.js'></script>
 
@@ -17,10 +21,8 @@
 <body>
     <!-- Filter elements should in here -->
     <div class='row' id='filters'>
-        <form>
+        <form class='advt-shadow'>
             <fieldset>
-                <legend>ADVT &mdash; Filters</legend>
-
                 <div class='large-12 columns'>
                     <div class='large-3 columns'>
                         <div class='row'>
@@ -79,8 +81,8 @@
                         </select>
                     </div>
                     <div class='large-2 columns'>
-                        <input type='submit' class='button' value='Search' />
-                        <div class='button'>Export</div>
+                        <input type='submit' class='advt-submit-button' value='Search' />
+                        <div class='advt-export-button'>Export</div>
                     </div>
                 </div>
             </fieldset>
@@ -89,11 +91,11 @@
 
     <div class='row' >
         <!-- Map elements should go in here -->
-        <div class='large-7 columns' id='map-canvas'></div>
+        <div class='large-7 columns advt-shadow' id='map-canvas'></div>
 
         <!-- Results elements should go in here -->
         <div class='large-5 columns' id='results'>
-            <div class='panel'>Results Pane: Depends on Filter implementation.</div>
+            <div class='panel advt-shadow'>Results Pane: Depends on Filter implementation.</div>
         </div>
 
     </div>
