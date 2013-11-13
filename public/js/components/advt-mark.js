@@ -53,7 +53,10 @@ define([], function() {
                     else {
                         // We tried to geocode too many addresses in a second. :(
                         if(status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
-                            alert("too fast");
+                            alert("your search is causing a lot of pings to google. wait one moment please");
+                            
+                            createMarkers(highschool,map);
+                          
                         }
                         else {
                             alert('Geocode was not successful for the following reason: ' + status);
