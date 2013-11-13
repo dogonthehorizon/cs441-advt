@@ -51,7 +51,7 @@ define([
     'components/advt-mark',
     'foundation',
     'jquery-ui'
-], function($, ko, formDropdowns, formDataBuilder, requestBuilder, SliderViewModel){
+], function($, ko, formDropdowns, formDataBuilder, reqBuilder, SliderViewModel){
 
     $(document).ready(function() {
         // Initialize all form dropdowns.
@@ -62,7 +62,7 @@ define([
         // Attach a listener on submit to the form.
         $('#advt-search-form').on('submit', function(el) {
             var data = formDataBuilder.build();
-            console.log(data);
+            reqBuilder.build(data);
             el.preventDefault();
         });
 
@@ -71,6 +71,7 @@ define([
             alert("This functionality has not yet been implemented.");
         });
 
+        // Attach a listener on click to toggle the form display.
         $('#advt-form-collapse').on('click', function() {
             var toggleText = "";
             if ($(this).html() === "&lt;SHOW&gt;") {
