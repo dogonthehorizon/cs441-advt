@@ -71,6 +71,18 @@ define([
             alert("This functionality has not yet been implemented.");
         });
 
+        $('#advt-form-collapse').on('click', function() {
+            var toggleText = "";
+            if ($(this).html() === "&lt;SHOW&gt;") {
+                toggleText = "&lt;HIDE&gt;"
+            } else {
+                toggleText = "&lt;SHOW&gt;"
+            }
+
+            $(this).html(toggleText);
+            $('.advt-collapse').toggle();
+        });
+
         // Initialize Foundation 4 JS
         $(document).foundation();
 

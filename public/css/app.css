@@ -5179,8 +5179,19 @@ form #advt-intended-majors {
 form .ui-slider-range {
   background-color: #4285f4 !important;
 }
+/* line 48, ../../sass/_cs441-data-visualization.scss */
+form #advt-form-collapse {
+  height: 16px;
+  font-size: .5em;
+  position: absolute;
+  margin-top: 4px;
+  margin-left: -35px;
+  padding: 4px;
+  width: 103.8%;
+  text-align: center;
+}
 
-/* line 49, ../../sass/_cs441-data-visualization.scss */
+/* line 60, ../../sass/_cs441-data-visualization.scss */
 .advt-shadow {
   -webkit-box-shadow: #cccccc 1px 3px 5px;
   -moz-box-shadow: #cccccc 1px 3px 5px;

@@ -44,6 +44,17 @@ form {
   .ui-slider-range {
     background-color: $googleBlue !important;
   }//ui-slider-range
+
+  #advt-form-collapse {
+    height: 16px;
+    font-size: .5em;
+    position: absolute;
+    margin-top: 4px;
+    margin-left: -35px;
+    padding: 4px;
+    width: 103.8%;
+    text-align: center;
+  }//advt-form-collapse
 }//form
 
 .advt-shadow {
