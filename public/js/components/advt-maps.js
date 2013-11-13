@@ -14,7 +14,7 @@
 define([
     'jquery',
     // Google Maps API -- This is loaded asynchronously to function better with RequireJS
-    'async!http://maps.googleapis.com/maps/api/js?key={REQUEST_API_KEY}&sensor=false!callback'
+    'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw&sensor=false!callback'
 ], function($){
     var mapOptions = {
         zoom: 8,

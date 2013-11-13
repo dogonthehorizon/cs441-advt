@@ -34,6 +34,7 @@ define([
     'viewmodels/SliderViewModel',
     'foundation',
     'components/advt-maps',
+	'components/request-builder',
     'jquery-ui'
 ], function($, ko, SliderViewModel){
 
