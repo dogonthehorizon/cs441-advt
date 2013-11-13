@@ -28,13 +28,13 @@ define([
 
             ko.utils.registerEventHandler(element, "slidechange", function (event, ui) {
                 var observable = valueAccessor();
-                observable(ui.value);
+                observable($(element).slider('values'));
             });
 
             // Make the slider values observable
             ko.utils.registerEventHandler(element, 'slide', function(event, ui) {
                 var observable = valueAccessor();
-                observable(ui.value);
+                observable($(element).slider('values'));
             });
 
             // Make sure we dispose of KO elements properly.
