@@ -9,6 +9,15 @@
  */
  define(['jquery', './response-builder'], function($, respBuilder) {
     return { 
+		/**
+		  * build
+		  *
+		  * Converts data from the form into a Fusion Table query, then queries the table.
+		  * Note: you must have the API key for this function to work. (See advt-maps)
+		  *
+		  * @author Aaron Dobbe
+		  * @since 11/12/13
+		  */
 		build: function(formData) {
 			var API_KEY = "{REQUEST_API_KEY}";
 			

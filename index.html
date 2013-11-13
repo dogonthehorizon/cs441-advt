@@ -12,33 +12,6 @@
 
   <!-- Project Javascript loaded via RequireJS -->
   <script data-main='public/main' src='public/js/vendor/require-2.1.9.min.js'></script>
-  <script>
-	function testSubmit() {
-		var testObj = {
-			"entryYear": 2011,
-			"gender": "male",
-			"applicationType": "completed",
-			"satReading": {
-				"min": 400,
-				"max": 800
-			},
-			"satMath": {
-				"min": 400,
-				"max": 800
-			},
-			"gpa": {
-				"min": 3.0,
-				"max": 4.0,
-			},
-			"intendedMajor": 701,
-			"city": "Portland",
-			"state": ""
-		}
-		require(['./components/request-builder'],function(requestBuilder) {
-			requestBuilder.build(testObj);
-		});
-	}
-  </script>
 
 </head>
 <body>
@@ -107,7 +80,7 @@
                     </div>
                     <div class='large-2 columns'>
                         <input type='submit' class='button' value='Search' />
-                        <div class='button' onClick="testSubmit()">Export</div>
+                        <div class='button'>Export</div>
                     </div>
                 </div>
             </fieldset>
