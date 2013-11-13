@@ -39,46 +39,7 @@ define([
     'jquery-ui'
 ], function($, ko, SliderViewModel,map,mark){
 	
-	var dummy = {
-		"city":"protland",
-		"zip":"dont worry",
-		"highschools":[
-		{
-			"name":"clack",
-			"address":"Portland, OR",
-			"students":"9001"
-		},
-		{
-			"name":"clack1",
-			"address":"Seattle, WA",
-			"students":"9001"
-		},
-		{
-			"name":"clack",
-			"address":"Eugene, OR",
-			"students":"9001"
-		},{
-			"name":"clack",
-			"address":"Beaverton, OR",
-			"students":"9001"
-		},{
-			"name":"clack",
-			"address":"Hillsboro, OR",
-			"students":"9001"
-		},{
-			"name":"clack",
-			"address":"Lynnwood, WA",
-			"students":"9001"
-		},{
-			"name":"clack",
-			"address":"Shoreline, WA",
-			"students":"9001"
-		}
-		]
-	};
-	//create listner for the Search button
-	$("#export").click(function(){mark.init(dummy,map)});
-	$("#form").submit(function(){mark.init(dummy,map)});
+	
     $(document).foundation();
     ko.applyBindings(new SliderViewModel());
 });
