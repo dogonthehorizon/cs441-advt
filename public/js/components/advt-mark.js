@@ -8,10 +8,7 @@
  *
  * @depends jquery, google,markers
  */
-define([
-// Google Maps API -- This is loaded asynchronously to function better with RequireJS
-'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyC0pm2UlX-jV6E4CLy-a4BgWEPLI40-qwU&sensor=false!callback'
-], function() {
+define([], function() {
 	
 
 	return {

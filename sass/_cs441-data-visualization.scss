@@ -5,6 +5,43 @@
  *
  */
 
+@import 'settings';                 // For color variables.
+@import "compass/css3/box-shadow";  // For, well, box shadows.
+
+body {
+  background-color: $lightGrey;
+  font-family: "proxima-nova", sans-serif;
+}//body
+
 #map-canvas {
   height: 587px; //TODO: Find a better way of calculating the canvas height.
-}
+}//map-canvas
+
+form {
+  margin-top: 20px;  // Get a little space from the top of the page.
+  background-color: $white;
+
+  .advt-form-buttons {
+    padding-top: 25px;
+
+    .advt-submit-button {
+      @include advt-button($googleBlue);
+    }//advt-submit-button
+
+    .advt-export-button {
+      @include advt-button($googleGreen);
+    }//advt-export-button
+  }//advt-form-buttons
+
+  #advt-intended-majors {
+    height: 156px  // Just tall enough to take up the entire column space.
+  }//advt-intended-majors
+
+  .ui-slider-range {
+    background-color: $googleBlue !important;
+  }//ui-slider-range
+}//form
+
+.advt-shadow {
+  @include box-shadow($shadowGrey 1px 3px 5px);
+}//advt-shadow

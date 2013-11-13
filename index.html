@@ -10,6 +10,10 @@
   <!-- jQuery UI CSS styles --><!-- TODO: Incorporate into SCSS sheets. -->
   <link rel='stylesheet' href='public/css/redmond/jquery-ui-1.10.3.custom.min.css'>
 
+  <!-- TypeKit Font Loading -->
+  <script type="text/javascript" src="//use.typekit.net/wwv6qwj.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
   <!-- Project Javascript loaded via RequireJS -->
   <script data-main='public/main' src='public/js/vendor/require-2.1.9.min.js'></script>
 
@@ -17,70 +21,59 @@
 <body>
     <!-- Filter elements should in here -->
     <div class='row' id='filters'>
-        <form id="form">
+        <form id='advt-search-form' class='advt-shadow'>
             <fieldset>
-                <legend>ADVT &mdash; Filters</legend>
-
                 <div class='large-12 columns'>
-                    <div class='large-3 columns'>
-                        <div class='row'>
-                            <label>Year of Entry</label>
-                            <input type='number' placeholder='(e.g. 2012)' />
+                    <div class='row'>
+                        <div class='large-3 columns'>
+                            <div class='row'>
+                                <label>Year of Entry</label>
+                                <input type='number' placeholder='(e.g. 2012)' />
+                            </div>
+                            <div class='row'>
+                                <label>Gender</label>
+                                <input type='radio' name='gender' value='male' class='radio' checked/> Male
+                                <input type='radio' name='gender' value='female' class='radio'/> Female
+                            </div>
+                            <div class='row'>
+                                <label>Application Type</label>
+                                <select id='advt-application-type' name='application-type'></select>
+                            </div>
                         </div>
-                        <div class='row'>
-                            <label>Gender</label>
-                            <input type='radio' value='male' class='radio' /> Male
-                            <input type='radio' value='female' class='radio'/> Female
+                        <div class='large-4 columns'>
+                            <div class='row'>
+                                <label>SAT Reading</label>
+                                <div class='large-4 columns'><input id="advt-sat-read-min" type='text' data-bind="value: satReading()[0]" /></div>
+                                <div class='large-4 columns'><div data-bind="slider: satReading, sliderOptions: {range: true, min:0, max:800, values: [0, 800], step: 1}"></div></div>
+                                <div class='large-4 columns'><input id="advt-sat-read-max" type='text' data-bind="value: satReading()[1]" /></div>
+                            </div>
+                            <div class='row'>
+                                <label>SAT Math</label>
+                                <div class='large-4 columns'><input id="advt-sat-math-min" type='text' data-bind="value: satMath()[0]" /></div>
+                                <div class='large-4 columns'><div data-bind="slider: satMath, sliderOptions: {range: true, min:0, max:800, values: [0, 800], step: 1}"></div></div>
+                                <div class='large-4 columns'><input id="advt-sat-math-max" type='text' data-bind="value: satMath()[1]" /></div>
+                            </div>
+                            <div class='row'>
+                                <label>GPA</label>
+                                <div class='large-4 columns'><input id='advt-gpa-min' class='advt-gpa-input' type='text' data-bind="value: GPA()[0]" /></div>
+                                <div class='large-4 columns'><div data-bind="slider: GPA, sliderOptions: {range: true, min:0, max:4, values: [0, 4], step: 0.1}"></div></div>
+                                <div class='large-4 columns'><input id='advt-gpa-max' class='advt-gpa-input' type='text' data-bind="value: GPA()[1]" /></div>
+                            </div>
                         </div>
-                        <div class='row'>
-                            <label>Application Type</label>
-                            <select name='application-type'>
-                                <option value='app-total'>All</option>
-                                <option value='app-completed'>Completed</option>
-                                <option value='app-accepted'>Accepted</option>
-                                <option value='app-waitlisted'>Waitlisted</option>
-                                <option value='app-deposit'>with Deposit</option>
-                                <option value='app-campus-visit'>with Campus Visitation</option>
-                                <option value='app-avj'>with Admissions Visitation Day (AVJ)</option>
-                                <option value='app-svd'>with Saturday Visit (SVD)</option>
-                                <option value='app-home-fair-visit'>with Hometown College Fair Visitation</option>
-                                <option value='app-home-fair-intro'>with personal introduction at college fair</option>
-                                <option value='app-sneaker'>Sneaker Applications</option>
-                            </select>
+                        <div class='large-3 columns'>
+                            <div class='row'>
+                                <label>Intended Field of Study</label>
+                                <select id='advt-intended-majors' class='select' multiple></select>
+                            </div>
                         </div>
-                    </div>
-                    <div class='large-4 columns'>
-                        <div class='row'>
-                            <label>SAT Reading</label>
-                            <div class='large-4 columns'><input type='text' data-bind="value: satReading()[0]" /></div>
-                            <div class='large-4 columns'><div data-bind="slider: satReading, sliderOptions: {range: true, min:0, max:800, values: [0, 800], step: 1}"></div></div>
-                            <div class='large-4 columns'><input type='text' data-bind="value: satReading()[1]" /></div>
+                        <div class='large-2 columns advt-form-buttons'>
+                            <div class='row'>
+                                <input type='submit' class='advt-submit-button' value='Search' />
+                            </div>
+                            <div class='row'>
+                                <div class='advt-export-button'>Export</div>
+                            </div>
                         </div>
-                        <div class='row'>
-                            <label>SAT Math</label>
-                            <div class='large-4 columns'><input type='text' data-bind="value: satMath()[0]" /></div>
-                            <div class='large-4 columns'><div data-bind="slider: satMath, sliderOptions: {range: true, min:0, max:800, values: [0, 800], step: 1}"></div></div>
-                            <div class='large-4 columns'><input type='text' data-bind="value: satMath()[1]" /></div>
-                        </div>
-                        <div class='row'>
-                            <label>GPA</label>
-                            <div class='large-4 columns'><input type='text' data-bind="value: GPA()[0]" /></div>
-                            <div class='large-4 columns'><div data-bind="slider: GPA, sliderOptions: {range: true, min:0, max:800, values: [0, 800], step: 1}"></div></div>
-                            <div class='large-4 columns'><input type='text' data-bind="value: GPA()[1]" /></div>
-                        </div>
-                    </div>
-                    <div class='large-3 columns'>
-                        <select class='select' size='5'>
-                            <option>All</option>
-                            <option>School of Engineering</option>
-                            <option>School of Nursing</option>
-                            <option>School of Business</option>
-                            <option>School of Arts and Sciences</option>
-                        </select>
-                    </div>
-                    <div class='large-2 columns'>
-                        <input type='submit'  class='button' value='Search' />
-                        <div id="export"class='button'>Export</div>
                     </div>
                 </div>
             </fieldset>
@@ -88,12 +81,11 @@
     </div>
 
     <div class='row' >
-        <!-- Map elements should go in here -->
-        <div class='large-7 columns' id='map-canvas'></div>
 
-        <!-- Results elements should go in here -->
+        <div class='large-7 columns advt-shadow' id='map-canvas'></div>
+
         <div class='large-5 columns' id='results'>
-            <div class='panel'>Results Pane: Depends on Filter implementation.</div>
+            <div class='panel advt-shadow'>Results Pane: Depends on Filter implementation.</div>
         </div>
 
     </div>

@@ -8,7 +8,7 @@
  * @since 11/13/13
  * @depends advt-markers
  */
- define(['./advt-markers'], function(markers) {
+ define(['components/advt-mark'], function(markers) {
     return { 
 		/**
 		  * build
