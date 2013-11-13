@@ -13,7 +13,7 @@
  */
 define([
     'jquery',
-    'async!http://maps.googleapis.com/maps/api/js?key=&sensor=false!callback'
+    'async!http://maps.googleapis.com/maps/api/js?key={REQUEST_API_KEY}&sensor=false!callback'
 ], function($){
     var mapOptions = {
         zoom: 6,

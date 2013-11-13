@@ -27,6 +27,12 @@ define([
             response.highschools = [];
 
             // loop through data and sort it by HS
+			
+			if (!data.rows) {
+				alert("Your search returned no results. Please relax the filters and try again.");
+				return;
+			}
+			
             for (var i=0; i < data.rows.length; i++) {
                 var foundOne = false;
                 var curName = data.rows[i][2];

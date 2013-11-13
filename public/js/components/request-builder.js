@@ -22,7 +22,7 @@ define([
           * @since 11/12/13
           */
         build: function(formData) {
-            var API_KEY = "{REQUEST_API_KEY}";
+            var API_KEY = "{REQUEST_API_KEY";
 
             var TABLE_ID = "1wn1wqRgW7XBJMZHC4vet88eC2vkkWvmrPiE1fnc";
 
@@ -40,7 +40,7 @@ define([
 
             if (formData.applicationType) {
                 if (formData.applicationType === "app-completed") {
-                    reqString += "Application_Status = 'C' AND ";
+                    reqString += "Application_Status IN ('C', 'D') AND ";
                 }
                 else if (formData.applicationType === "app-accepted") {
                     reqString += "App_Decision_Code = 'A' AND ";
