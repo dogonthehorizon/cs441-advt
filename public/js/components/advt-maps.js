@@ -17,7 +17,7 @@ define([
     'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyC0pm2UlX-jV6E4CLy-a4BgWEPLI40-qwU&sensor=false!callback'
 ], function($){
     var mapOptions = {
-        zoom: 8,
+        zoom: 6,
         center: new google.maps.LatLng(45.5200, -122.6819),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };

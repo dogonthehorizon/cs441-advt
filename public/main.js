@@ -73,20 +73,12 @@ define([
 			"name":"clack",
 			"address":"Shoreline, WA",
 			"students":"9001"
-		},{
-			"name":"clack",
-			"address":"Edmonds, WA",
-			"students":"9001"
-		},{
-			"name":"clack",
-			"address":"Portland, ME",
-			"students":"9001"
-		},
+		}
 		]
 	};
 	//create listner for the Search button
 	$("#export").click(function(){mark.init(dummy,map)});
-	
+	$("#form").submit(function(){mark.init(dummy,map)});
     $(document).foundation();
     ko.applyBindings(new SliderViewModel());
 });
