@@ -76,10 +76,20 @@ define([
 
             if (formData.intendedMajor)
             {
-                //TODO: intendedMajor is an array of values, since we explicitly allow users
-                //TODO: to select more than one major. We should therefore be iterating over
-                //TODO: these values into a comma separated list, or something.
-                reqString += "Planned_Major_Code = " + formData.intendedMajor + " AND ";
+                //intendedMajor is an array of values, since we explicitly allow users
+                //to select more than one major. We therefore iterate over
+                //these values into a comma separated list.
+                reqString += "Planned_Major_Code IN (";
+				
+				for (var i = 0; i < formData.intendedMajor.length; i++)
+				{
+					reqString += "'" + formData.intendedMajor[i] + "'";
+					if (i < formData.intendedMajor.length-1) {
+						reqString += ", ";
+					}
+				}
+
+				reqString += ") AND ";
             }
 
             if (formData.city)
@@ -101,7 +111,6 @@ define([
 
             // Create a callback function to run after the FT request has completed
             var response = function( data ) {
-                //console.log(data);
                 respBuilder.build(data, formData.city, formData.state);
             };
 
