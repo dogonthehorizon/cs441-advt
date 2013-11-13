@@ -5090,15 +5090,20 @@ body {
 }
 
 /* line 20, ../../sass/_cs441-data-visualization.scss */
+#advt-filters, #advt-content {
+  max-width: 70em;
+}
+
+/* line 24, ../../sass/_cs441-data-visualization.scss */
 form {
   margin-top: 20px;
   background-color: white;
 }
-/* line 24, ../../sass/_cs441-data-visualization.scss */
+/* line 28, ../../sass/_cs441-data-visualization.scss */
 form .advt-form-buttons {
   padding-top: 25px;
 }
-/* line 27, ../../sass/_cs441-data-visualization.scss */
+/* line 31, ../../sass/_cs441-data-visualization.scss */
 form .advt-form-buttons .advt-submit-button {
   border-style: solid;
   border-width: 1px;
@@ -5132,7 +5137,7 @@ form .advt-form-buttons .advt-submit-button:hover, form .advt-form-buttons .advt
 form .advt-form-buttons .advt-submit-button:hover, form .advt-form-buttons .advt-submit-button:focus {
   color: white;
 }
-/* line 31, ../../sass/_cs441-data-visualization.scss */
+/* line 35, ../../sass/_cs441-data-visualization.scss */
 form .advt-form-buttons .advt-export-button {
   border-style: solid;
   border-width: 1px;
@@ -5166,16 +5171,16 @@ form .advt-form-buttons .advt-export-button:hover, form .advt-form-buttons .advt
 form .advt-form-buttons .advt-export-button:hover, form .advt-form-buttons .advt-export-button:focus {
   color: white;
 }
-/* line 36, ../../sass/_cs441-data-visualization.scss */
+/* line 40, ../../sass/_cs441-data-visualization.scss */
 form #advt-intended-majors {
   height: 156px;
 }
-/* line 40, ../../sass/_cs441-data-visualization.scss */
+/* line 44, ../../sass/_cs441-data-visualization.scss */
 form .ui-slider-range {
   background-color: #4285f4 !important;
 }
 
-/* line 45, ../../sass/_cs441-data-visualization.scss */
+/* line 49, ../../sass/_cs441-data-visualization.scss */
 .advt-shadow {
   -webkit-box-shadow: #cccccc 1px 3px 5px;
   -moz-box-shadow: #cccccc 1px 3px 5px;
