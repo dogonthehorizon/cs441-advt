@@ -34,12 +34,10 @@ define([
     'viewmodels/SliderViewModel',
     'components/advt-maps',
     'components/advt-mark',
+    'components/request-builder',
     'foundation',
-    
     'jquery-ui'
-], function($, ko, SliderViewModel,map,mark){
-	
-	
+], function($, ko, SliderViewModel){
     $(document).foundation();
     ko.applyBindings(new SliderViewModel());
 });
