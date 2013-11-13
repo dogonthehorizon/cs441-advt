@@ -53,17 +53,28 @@ define([
     'jquery-ui'
 ], function($, ko, formDropdowns, formDataBuilder, requestBuilder, SliderViewModel){
 
-    $(document).ready(function(){
+    $(document).ready(function() {
+        // Initialize all form dropdowns.
         formDropdowns.initApplicationType($('#advt-application-type'));
         formDropdowns.initIntendedMajor($('#advt-intended-majors'));
+        formDropdowns.initStateSelect($('#advt-state-select'));
 
+        // Attach a listener on submit to the form.
         $('#advt-search-form').on('submit', function(el) {
             var data = formDataBuilder.build();
             console.log(data);
             el.preventDefault();
         });
 
+        // Attach a listener on click to the export button.
+        $('.advt-export-button').on('click', function() {
+            alert("This functionality has not yet been implemented.");
+        });
+
+        // Initialize Foundation 4 JS
         $(document).foundation();
+
+        //Instantiate a new slider view model.
         ko.applyBindings(new SliderViewModel());
         // TODO: This is a hack and it should be fixed properly.
         $('#advt-gpa-min').val(0);

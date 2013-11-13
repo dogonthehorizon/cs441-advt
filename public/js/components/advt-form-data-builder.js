@@ -32,7 +32,7 @@ define([
                 //TODO: This could use some error checking.
                 "entryYear": $("#advt-search-form input[type='number']").val(),
                 "gender": gender,
-                "applicationType": $("#advt-search-form input[name='application-type']").val(),
+                "applicationType": $('#advt-application-type').val(),
                 "satReading": {
                     "min": $('#advt-sat-read-min').val(),
                     "max": $('#advt-sat-read-max').val()
@@ -46,8 +46,9 @@ define([
                     "max": $('#advt-gpa-max').val()
                 },
                 "intendedMajor": $('#advt-intended-majors').val(),
-                "city": "Portland",
-                "state": ""
+                //TODO: Only send one or the other, not both.
+                "city": $('#advt-city-input').val(),
+                "state": $('#advt-state-select').val()
             };
         }
     };

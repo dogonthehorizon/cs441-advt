@@ -6,9 +6,12 @@
   <title>Admissions Data Visualization Tool.</title>
 
   <!-- Project Stylesheet -->
-  <link rel="stylesheet" href="public/css/app.css">
+  <link rel="stylesheet" href="public/css/app.css" />
   <!-- jQuery UI CSS styles --><!-- TODO: Incorporate into SCSS sheets. -->
-  <link rel='stylesheet' href='public/css/redmond/jquery-ui-1.10.3.custom.min.css'>
+  <link rel='stylesheet' href='public/css/redmond/jquery-ui-1.10.3.custom.min.css' />
+  <!-- Vex UI CSS styles --><!-- TODO: Incorporate into SCSS sheets. -->
+  <link rel='stylesheet' href='public/css/vex/vex.css' />
+  <link rel='stylesheet' href='public/css/vex/vex-theme-os.css' />
 
   <!-- TypeKit Font Loading -->
   <script type="text/javascript" src="//use.typekit.net/wwv6qwj.js"></script>
@@ -20,12 +23,12 @@
 </head>
 <body>
     <!-- Filter elements should in here -->
-    <div class='row' id='filters'>
+    <div class='row' id='advt-filters'>
         <form id='advt-search-form' class='advt-shadow'>
             <fieldset>
                 <div class='large-12 columns'>
                     <div class='row'>
-                        <div class='large-3 columns'>
+                        <div class='large-2 columns'>
                             <div class='row'>
                                 <label>Year of Entry</label>
                                 <input type='number' placeholder='(e.g. 2012)' />
@@ -40,7 +43,7 @@
                                 <select id='advt-application-type' name='application-type'></select>
                             </div>
                         </div>
-                        <div class='large-4 columns'>
+                        <div class='large-5 columns'>
                             <div class='row'>
                                 <label>SAT Reading</label>
                                 <div class='large-4 columns'><input id="advt-sat-read-min" type='text' data-bind="value: satReading()[0]" /></div>
@@ -75,12 +78,25 @@
                             </div>
                         </div>
                     </div>
+                    <div class='row'>
+                        <div class='large-5 large-centered columns'>
+                            <div class='large-5 columns'>
+                                <label>City</label><input id='advt-city-input' type='text' placeholder='e.g. Portland'/>
+                            </div>
+                            <div class='large-2 columns'>
+                                <strong>OR</strong>
+                            </div>
+                            <div class='large-5 columns'>
+                                <label>State</label><select id='advt-state-select' class='select'></select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </fieldset>
         </form>
     </div>
 
-    <div class='row' >
+    <div class='row' id='advt-content'>
 
         <div class='large-7 columns advt-shadow' id='map-canvas'></div>
 

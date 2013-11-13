@@ -17,6 +17,10 @@ body {
   height: 587px; //TODO: Find a better way of calculating the canvas height.
 }//map-canvas
 
+#advt-filters, #advt-content {
+  max-width: 70em;
+}
+
 form {
   margin-top: 20px;  // Get a little space from the top of the page.
   background-color: $white;
