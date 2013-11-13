@@ -22,7 +22,7 @@ define([
           * @since 11/12/13
           */
         build: function(formData) {
-            var API_KEY = "{REQUEST_API_KEY";
+            var API_KEY = "";
 
             var TABLE_ID = "1wn1wqRgW7XBJMZHC4vet88eC2vkkWvmrPiE1fnc";
 

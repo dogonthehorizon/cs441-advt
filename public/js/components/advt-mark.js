@@ -9,7 +9,9 @@
  *
  * @depends jQuery, Google Maps
  */
-define([], function() {
+define([
+	'Constants'
+	], function(constants) {
 
     return {
 
@@ -23,7 +25,7 @@ define([], function() {
          * @param data
          * @param map
          */
-        'init' : function(data, map) {
+        'init' : function(data) {
             var Geocoder = new google.maps.Geocoder();
 
             // Function that creates a marker on each specific address.
@@ -55,7 +57,7 @@ define([], function() {
                         if(status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
                             alert("your search is causing a lot of pings to google. wait one moment please");
                             
-                            createMarkers(highschool,map);
+                            createMarkers(highschool,constant.MAP);
                           
                         }
                         else {
@@ -68,9 +70,10 @@ define([], function() {
             };//createMarkers
 
             // Loop through and create all the markers.
+			console.log(data);
             for (var i = 0; i < data.highschools.length; i++) {
 
-                createMarkers(data.highschools[i], map);
+                createMarkers(data.highschools[i], constants.MAP);
 
             }//for
         }//init

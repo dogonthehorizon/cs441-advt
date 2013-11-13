@@ -49,7 +49,7 @@ define([
             }
 
             // Send formatted response to the map layer!
-            markers.init(data);
+            markers.init(response);
         }
     };
  });
