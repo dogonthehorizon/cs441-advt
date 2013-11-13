@@ -13,8 +13,9 @@
  */
 define([
     'jquery',
-    'async!http://maps.googleapis.com/maps/api/js?key={REQUEST_API_KEY}&sensor=false!callback'
-], function($){
+    'Constants',
+    'async!http://maps.googleapis.com/maps/api/js?key=&sensor=false!callback'
+], function($,constants){
     var mapOptions = {
         zoom: 6,
         center: new google.maps.LatLng(45.5200, -122.6819),
@@ -26,6 +27,7 @@ define([
     // a single node. Since we know there is only one map-canvas
     // node on the page, we simply return the first element of
     // this collection.
-    return new google.maps.Map($('#map-canvas')[0], mapOptions);
+    
+     constants.MAP = new google.maps.Map($('#map-canvas')[0], mapOptions);
 });
 
