@@ -11,8 +11,9 @@
  */
 define([
     'jquery',
-    'knockout'
-], function($, ko){
+    'knockout',
+    'Constants'
+], function($, ko, Constants){
     ko.bindingHandlers.slider = {
 
         //Initialize the UI element.
@@ -25,10 +26,15 @@ define([
             // Init the UI element.
             $(element).slider(options);
 
+            ko.utils.registerEventHandler(element, "slidechange", function (event, ui) {
+                var observable = valueAccessor();
+                observable(ui.value);
+            });
+
             // Make the slider values observable
             ko.utils.registerEventHandler(element, 'slide', function(event, ui) {
                 var observable = valueAccessor();
-                observable($(element).slider('values'));
+                observable(ui.value);
             });
 
             // Make sure we dispose of KO elements properly.
@@ -55,9 +61,9 @@ define([
     return function() {
         var self = this;
 
-        self.satReading = ko.observableArray([0,800]); //TODO: This should be moved into a constant or something.
-        self.satMath    = ko.observableArray([0,800]); //TODO: This should be moved into a constant or something.
-        self.GPA        = ko.observableArray([0,800]); //TODO: This should be moved into a constant or something.
+        self.satReading = ko.observableArray([Constants.SAT_MIN, Constants.SAT_MAX]);
+        self.satMath    = ko.observableArray([Constants.SAT_MIN, Constants.SAT_MAX]);
+        self.GPA        = ko.observableArray([Constants.GPA_MIN, Constants.GPA_MAX]);
 
     };
 });

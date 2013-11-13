@@ -5094,16 +5094,12 @@ form {
   margin-top: 20px;
   background-color: white;
 }
-
-/* line 25, ../../sass/_cs441-data-visualization.scss */
-.advt-shadow {
-  -webkit-box-shadow: #cccccc 1px 3px 5px;
-  -moz-box-shadow: #cccccc 1px 3px 5px;
-  box-shadow: #cccccc 1px 3px 5px;
+/* line 24, ../../sass/_cs441-data-visualization.scss */
+form .advt-form-buttons {
+  padding-top: 25px;
 }
-
-/* line 29, ../../sass/_cs441-data-visualization.scss */
-.advt-submit-button {
+/* line 27, ../../sass/_cs441-data-visualization.scss */
+form .advt-form-buttons .advt-submit-button {
   border-style: solid;
   border-width: 1px;
   cursor: pointer;
@@ -5126,18 +5122,18 @@ form {
   -webkit-border-radius: 3px;
   border-radius: 3px;
   border-color: #4285f4;
+  width: 100%;
 }
 /* line 122, ../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
-.advt-submit-button:hover, .advt-submit-button:focus {
+form .advt-form-buttons .advt-submit-button:hover, form .advt-form-buttons .advt-submit-button:focus {
   background-color: #1266f1;
 }
 /* line 133, ../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
-.advt-submit-button:hover, .advt-submit-button:focus {
+form .advt-form-buttons .advt-submit-button:hover, form .advt-form-buttons .advt-submit-button:focus {
   color: white;
 }
-
-/* line 33, ../../sass/_cs441-data-visualization.scss */
-.advt-export-button {
+/* line 31, ../../sass/_cs441-data-visualization.scss */
+form .advt-form-buttons .advt-export-button {
   border-style: solid;
   border-width: 1px;
   cursor: pointer;
@@ -5160,17 +5156,28 @@ form {
   -webkit-border-radius: 3px;
   border-radius: 3px;
   border-color: #0f9d58;
+  width: 100%;
 }
 /* line 122, ../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
-.advt-export-button:hover, .advt-export-button:focus {
+form .advt-form-buttons .advt-export-button:hover, form .advt-form-buttons .advt-export-button:focus {
   background-color: #0b6e3e;
 }
 /* line 133, ../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.2/scss/foundation/components/_buttons.scss */
-.advt-export-button:hover, .advt-export-button:focus {
+form .advt-form-buttons .advt-export-button:hover, form .advt-form-buttons .advt-export-button:focus {
   color: white;
 }
-
-/* line 37, ../../sass/_cs441-data-visualization.scss */
-.ui-slider-range {
+/* line 36, ../../sass/_cs441-data-visualization.scss */
+form #advt-intended-majors {
+  height: 156px;
+}
+/* line 40, ../../sass/_cs441-data-visualization.scss */
+form .ui-slider-range {
   background-color: #4285f4 !important;
+}
+
+/* line 45, ../../sass/_cs441-data-visualization.scss */
+.advt-shadow {
+  -webkit-box-shadow: #cccccc 1px 3px 5px;
+  -moz-box-shadow: #cccccc 1px 3px 5px;
+  box-shadow: #cccccc 1px 3px 5px;
 }

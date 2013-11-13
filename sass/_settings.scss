@@ -11,6 +11,7 @@ $googleGreen: #0f9d58;
 @mixin advt-button($color) {
   @include button($button-med, $color, 3px, false, false, false);
   border-color: $color;
+  width: 100%;
 }
 
 //

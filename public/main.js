@@ -13,8 +13,18 @@ require.config({
         'jquery-ui':'vendor/jquery-ui-1.10.3.custom.min',
         'async':'vendor/requirejs-lib/async',
         'knockout':'vendor/knockout-2.3.0.min',
-        'foundation':'foundation/foundation' //TODO: Remove unused foundation
-                                             //      js from project.
+        'foundation':'foundation/foundation', //TODO: Remove unused foundation
+                                              //      js from project.
+        'foundation-forms':'foundation/foundation.forms'
+    },
+    shim: {
+        foundation: {
+            exports: 'Foundation',
+            deps: ['jquery']
+        },
+        'foundation-forms': {
+            deps: ['foundation']
+        }
     }
 });
 
@@ -31,14 +41,29 @@ require.config({
 define([
     'jquery',
     'knockout',
+    'components/advt-form-dropdowns',
+    'components/advt-form-data-builder',
     'viewmodels/SliderViewModel',
     'foundation',
+    'foundation-forms',
     'components/advt-maps',
     'jquery-ui'
-], function($, ko, SliderViewModel){
+], function($, ko, formDropdowns, formDataBuilder, SliderViewModel){
 
     $(document).ready(function(){
+        formDropdowns.initApplicationType($('#advt-application-type'));
+        formDropdowns.initIntendedMajor($('#advt-intended-majors'));
+
+        $('#advt-search-form').on('submit', function(el) {
+            var data = formDataBuilder.build();
+            console.log(data);
+            el.preventDefault();
+        });
+
         $(document).foundation();
         ko.applyBindings(new SliderViewModel());
-    });  // document.ready
-});  // requirejs
+        // TODO: This is a hack and it should be fixed properly.
+        $('#advt-gpa-min').val(0);
+        $('#advt-gpa-max').val(4);
+    });  //document.ready
+});  //requirejs
