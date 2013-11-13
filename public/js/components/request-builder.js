@@ -7,109 +7,88 @@
  * @since 11/12/13
  * @depends google
  */
- define({		
-	build: function(formData) {
-		if(!this.httpRequest) {
-			this.makeRequestor();
-		}
-		
-		var reqString = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT UPortland_UniqueID FROM 13na5H4_enS7_zftNnAhsd1JWpgDBVv6tg5P_624 WHERE ";
-		
-		if (formData.entryYear) {
-			reqString += "Entry_Year = " + formData.entryYear + " AND ";
-		}
-		
-		if (formData.gender) {
-			if (formData.gender == "male") reqString += "Gender = 'M' AND ";
-			if (formData.gender == "female") reqString += "Gender = 'F' AND ";
-		}
-		
-		if (formData.applicationType) {
-			if (formData.applicationType == "Completed") {
-				reqString += "Application_Status = 'C' AND ";
+ define(['jquery'], function($) {
+    return { 
+		build: function(formData) {
+			var API_KEY = "{REQUEST_API_KEY}";
+			var TABLE_ID = "1wn1wqRgW7XBJMZHC4vet88eC2vkkWvmrPiE1fnc";
+			
+			var reqString = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT UPortland_UniqueID, HighSchoolCode, 'High School Name' FROM "
+							+ TABLE_ID + " WHERE ";
+			
+			if (formData.entryYear) {
+				reqString += "Entry_Year = " + formData.entryYear + " AND ";
 			}
-			else if (formData.applicationType == "Accepted") {
-				reqString += "App_Decision_Code = 'A' AND ";
+			
+			if (formData.gender) {
+				if (formData.gender == "male") reqString += "Gender = 'M' AND ";
+				if (formData.gender == "female") reqString += "Gender = 'F' AND ";
 			}
-			else if (formData.applicationType == "Waitlisted") {
-				reqString += "App_Decision_Code = 'W' AND ";
-			}
-			else if (formData.applicationType == "Deposit") {
-				// Not sure yet.
-				reqString += "";
-			}
-			else if (formData.applicationType == "Visitation") {
-				reqString += "UPVisits IN ('AVJ', 'SVD', 'UPV') AND ";
-			}
-			else if (formData.applicationType == "AVJ") {
-				reqString += "UPVisits = 'AVJ' AND ";
-			}
-			else if (formData.applicationType == "SVD") {
-				reqString += "UPVisits = 'SVD' AND ";
-			}
-			else if (formData.applicationType == "Fair") {
-				// Not sure yet.
-				reqString += "";
-			}
-			else if (formData.applicationType == "Introduction") {
-				// Not sure yet.
-				reqString += "";
-			}
-			else if (formData.applicationType == "Sneaker") {
-				reqString += "First_Contact_Code = '1ST' AND ";
-			}
-		}
-		
-		if (formData.intendedMajor)
-		{
-			reqString += "Planned_Major_Code = " + formData.intendedMajor + " AND ";
-		}
-		
-		if (formData.city)
-		{
-			reqString += "Location CONTAINS IGNORING CASE '" + formData.city + "' AND ";
-		}
-		
-		if (formData.state)
-		{
-			reqString += "Location CONTAINS IGNORING CASE '" + formData.state + "' AND ";
-		}
-		
-		// SAT/GPA data will always be there
-		reqString += "SAT_Verbal >= " + formData.satReading.min + " AND SAT_Verbal <= " + formData.satReading.max;
-		reqString += " AND SAT_MAth >= " + formData.satMath.min + " AND SAT_MAth <= " + formData.satMath.max;
-		reqString += " AND HS_GPA >= " + formData.gpa.min + " AND HS_GPA <= " + formData.gpa.max;
-		
-		// TODO: remove once testing is complete
-		console.log(reqString);
-	},
-	
-	/**
-	 * This function is pulled pretty much straight out of Dr. Crenshaw's CS441
-	 * integrated skills lab.
-	 *
-	 * Should only be called once, to create the http requestor with which to
-	 * make requests to the Fusion Table.
-	 */
-	makeRequestor: function() {
-		if(window.XMLHttpRequest) {// Mozilla, Safari, ...
-			this.httpRequest = new XMLHttpRequest();
-		} else if(window.ActiveXObject) {// IE
-			try {
-				this.httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {
-				try {
-					this.httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-				} catch (e) {
+			
+			if (formData.applicationType) {
+				if (formData.applicationType == "Completed") {
+					reqString += "Application_Status = 'C' AND ";
+				}
+				else if (formData.applicationType == "Accepted") {
+					reqString += "App_Decision_Code = 'A' AND ";
+				}
+				else if (formData.applicationType == "Waitlisted") {
+					reqString += "App_Decision_Code = 'W' AND ";
+				}
+				else if (formData.applicationType == "Deposit") {
+					// Not sure yet.
+					reqString += "";
+				}
+				else if (formData.applicationType == "Visitation") {
+					reqString += "UPVisits IN ('AVJ', 'SVD', 'UPV') AND ";
+				}
+				else if (formData.applicationType == "AVJ") {
+					reqString += "UPVisits = 'AVJ' AND ";
+				}
+				else if (formData.applicationType == "SVD") {
+					reqString += "UPVisits = 'SVD' AND ";
+				}
+				else if (formData.applicationType == "Fair") {
+					// Not sure yet.
+					reqString += "";
+				}
+				else if (formData.applicationType == "Introduction") {
+					// Not sure yet.
+					reqString += "";
+				}
+				else if (formData.applicationType == "Sneaker") {
+					reqString += "First_Contact_Code = '1ST' AND ";
 				}
 			}
+			
+			if (formData.intendedMajor)
+			{
+				reqString += "Planned_Major_Code = " + formData.intendedMajor + " AND ";
+			}
+			
+			if (formData.city)
+			{
+				reqString += "Location CONTAINS IGNORING CASE '" + formData.city + "' AND ";
+			}
+			
+			if (formData.state)
+			{
+				reqString += "Location CONTAINS IGNORING CASE '" + formData.state + "' AND ";
+			}
+			
+			// SAT/GPA data will always be there
+			reqString += "SAT_Verbal >= " + formData.satReading.min + " AND SAT_Verbal <= " + formData.satReading.max;
+			reqString += " AND SAT_MAth >= " + formData.satMath.min + " AND SAT_MAth <= " + formData.satMath.max;
+			reqString += " AND HS_GPA >= " + formData.gpa.min + " AND HS_GPA <= " + formData.gpa.max;
+			
+			reqString += "&key=" + API_KEY;
+			
+			var response = function( data ) { 
+				console.log(data);
+			}
+			
+			// Use JQuery to make a request to the Fusion Table
+			$.get(reqString, response);
 		}
-
-		if(!this.httpRequest) {
-			alert('Cannot create http requestor!');
-			return false;
-		}
-		
-		return true;
 	}
  });
