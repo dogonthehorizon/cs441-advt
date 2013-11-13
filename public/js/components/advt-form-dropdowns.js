@@ -1,10 +1,19 @@
 /**
- * form-dropdowns
+ * advt-form-dropdowns
+ *
+ * Construct dropdown menus for use in the primary form and append them to the provided
+ * elements.
+ *
+ * @author Fernando Freire
+ * @since 11/13/13
+ *
+ * @depends 'jQuery'
  */
 define([
     'jquery'
 ], function($){
 
+    // Supported application types
     var _applicationTypeOptions = {
         "app-total": "All",
         "app-completed": "Completed",
@@ -19,6 +28,7 @@ define([
         "app-sneaker": "Sneaker Applications"
     };
 
+    // Supported Fields of Study
     var _intendedMajorOptions = {
         502:	'Accounting',
         2105:	'Administration of Justice',
@@ -153,6 +163,18 @@ define([
     };
 
     return {
+
+        /**
+         * initApplicationType
+         *
+         * Given a form select object, attach the supported array
+         * of application types to that select object.
+         *
+         * @auther Fernando Freire
+         * @since 11/13/13
+         *
+         * @param select - the DOM node associated with a select element.
+         */
         "initApplicationType": function(select) {
             $.each(_applicationTypeOptions, function(value, text){
                 select.append(
@@ -160,6 +182,18 @@ define([
                 );
             });
         },
+
+        /**
+         * initIntendedMajor
+         *
+         * Given a form select object, attach the supported array
+         * of fields of study to that select object.
+         *
+         * @author Fernando Freire
+         * @since 11/13/13
+         *
+         * @param select - the DOM node associated with a select element.
+         */
         "initIntendedMajor": function(select) {
             $.each(_intendedMajorOptions, function(value, text){
                 select.append(
@@ -169,3 +203,4 @@ define([
         }
     };
 });
+

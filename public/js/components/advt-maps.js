@@ -28,3 +28,4 @@ define([
     // this collection.
     return new google.maps.Map($('#map-canvas')[0], mapOptions);
 });
+

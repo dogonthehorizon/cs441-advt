@@ -26,13 +26,13 @@ define([
             // Init the UI element.
             $(element).slider(options);
 
-            ko.utils.registerEventHandler(element, "slidechange", function (event, ui) {
+            ko.utils.registerEventHandler(element, "slidechange", function() {
                 var observable = valueAccessor();
                 observable($(element).slider('values'));
             });
 
             // Make the slider values observable
-            ko.utils.registerEventHandler(element, 'slide', function(event, ui) {
+            ko.utils.registerEventHandler(element, 'slide', function() {
                 var observable = valueAccessor();
                 observable($(element).slider('values'));
             });
