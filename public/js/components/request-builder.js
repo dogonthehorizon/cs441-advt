@@ -5,15 +5,16 @@
  *
  * @author Aaron Dobbe
  * @since 11/12/13
- * @depends google
+ * @depends google, jquery, response-builder.js
  */
- define(['jquery'], function($) {
+ define(['jquery', './response-builder'], function($, respBuilder) {
     return { 
 		build: function(formData) {
 			var API_KEY = "{REQUEST_API_KEY}";
+			
 			var TABLE_ID = "1wn1wqRgW7XBJMZHC4vet88eC2vkkWvmrPiE1fnc";
 			
-			var reqString = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT UPortland_UniqueID, HighSchoolCode, 'High School Name' FROM "
+			var reqString = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT UPortland_UniqueID, HighSchoolCode, 'High School Name', Location FROM "
 							+ TABLE_ID + " WHERE ";
 			
 			if (formData.entryYear) {
@@ -73,7 +74,7 @@
 			
 			if (formData.state)
 			{
-				reqString += "Location CONTAINS IGNORING CASE '" + formData.state + "' AND ";
+				reqString += "State = '" + formData.state + "' AND ";
 			}
 			
 			// SAT/GPA data will always be there
@@ -83,8 +84,10 @@
 			
 			reqString += "&key=" + API_KEY;
 			
+			// Create a callback function to run after the FT request has completed
 			var response = function( data ) { 
-				console.log(data);
+				//console.log(data);
+				respBuilder.build(data, formData.city, formData.state);
 			}
 			
 			// Use JQuery to make a request to the Fusion Table
