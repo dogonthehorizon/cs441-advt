@@ -15,7 +15,8 @@ require.config({
         'knockout':'vendor/knockout-2.3.0.min',
         'foundation':'foundation/foundation', //TODO: Remove unused foundation
                                               //      js from project.
-        'foundation-forms':'foundation/foundation.forms'
+        'foundation-forms':'foundation/foundation.forms',
+        'advtZipLayer':'components/advtZipLayer'
     },
     shim: {
         foundation: {
@@ -45,13 +46,15 @@ define([
     'components/advt-form-data-builder',
     'components/request-builder',
     'viewmodels/SliderViewModel',
+    'advtZipLayer',
     'foundation',
     'foundation-forms',
     'components/advt-maps',
     'components/advt-mark',
     'foundation',
     'jquery-ui'
-], function($, ko, formDropdowns, formDataBuilder, reqBuilder, SliderViewModel){
+    
+], function($, ko, formDropdowns, formDataBuilder, reqBuilder, SliderViewModel, advtZipLayer){
 
     $(document).ready(function() {
         // Initialize all form dropdowns.

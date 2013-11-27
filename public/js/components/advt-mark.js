@@ -57,7 +57,7 @@ define([
                         if(status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
                             alert("your search is causing a lot of pings to google. wait one moment please");
                             
-                            createMarkers(highschool,constant.MAP);
+                            createMarkers(highschool,constants.MAP);
                           
                         }
                         else {

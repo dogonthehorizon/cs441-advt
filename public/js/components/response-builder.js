@@ -9,8 +9,11 @@
  * @depends advt-markers
  */
 define([
-    'components/advt-mark'
-], function(markers) {
+	'jquery',
+    'components/advt-mark',
+    'advtZipLayer',
+    'components/advt-maps'
+], function($, markers, advtZipLayer, maps) {
     return {
         /**
           * build
@@ -50,6 +53,9 @@ define([
 
             // Send formatted response to the map layer!
             markers.init(response);
+            
+            console.log(maps.zipLayer);
+            advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val());
         }
     };
  });
