@@ -54,8 +54,7 @@ define([
             // Send formatted response to the map layer!
             markers.init(response);
             
-            console.log(maps.zipLayer);
-            advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val());
+            advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val(),data);
         }
     };
  });
