@@ -10,8 +10,10 @@
  * @depends jQuery, Google Maps
  */
 define([
-	'Constants'
-	], function(constants) {
+	'Constants',
+	'advtZipLayer',
+    'components/advt-maps'
+	], function(constants,advtZipLayer,maps) {
 
     return {
 

@@ -31,16 +31,20 @@ define(['jquery',
 
 	constants.MAP = new google.maps.Map($('#map-canvas')[0], mapOptions);
 
-	var zipEID = '1U6n-9O6I9q4qG10uNcNrCAlvactfL7O07IVPLbU';
+	
 	//setting up the zip code layer
-	var zipLayer = new advtZipLayer.zipLayer(new google.maps.FusionTablesLayer({
-		query : {
-			from : zipEID,
-		}
-	}), zipEID, constants.MAP);
+	var zipLayer = new advtZipLayer.zipLayer(new google.maps.FusionTablesLayer, "zipEID", constants.MAP);
 	
 	zipLayer.FTLayer.setMap(constants.MAP);
 	
+	//add an event listener for clicks - for now all this does is display the zip code in a popup
+	google.maps.event.addListener(zipLayer.FTLayer, 'click',function(displayedArea) {
+		// Get the necessary information from the clicked area
+		var information =displayedArea.row['ZipCodeArea'].value;
+		console.log(information);
+		displayedArea.infoWindowHtml ="ZIP Code: " + information;
+	});
+
 	return{
 		zipLayer:zipLayer
 	};

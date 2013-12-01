@@ -12,7 +12,6 @@ define(['Constants'], function(constants) {
 
 
 
-
 /* changeState(state)
  *
  * changes the state for which the zip codes are being displayed
@@ -22,29 +21,51 @@ define(['Constants'], function(constants) {
  * @returns void
  */
 var changeState = function(state, schools) {
-	console.log(this.eID);
-//	console.log(schools);
+	console.log("changeState");
+	//console.log(this.eID);
+	console.log(schools);
 	newEID = ZipTables[state];
 	this.eID = newEID;
-	console.log("changeState");
-	this.FTLayer.setOptions({
-		query : {
-			from : this.eID
-		}
-	});
-	this.FTLayer.setMap(constants.MAP);
+	
+	//make sure we have the zip code data for the state we're searching in
+	if(newEID!=undefined)
+	{
+		var zips = scrubZips(schools);
+		//switch the table we're using to that of the new state
+		 this.FTLayer.setOptions({
+			 query : {
+				 from : this.eID,
+				 where : 'ZipCodeArea  IN (' + zips + ')'
+			 }
+		 });
+	}
+	else
+	{
+		console.log("no zip data");
+	}
+	 this.FTLayer.setMap(constants.MAP);
 };
 
-/* abbreviation(state)
+/* scrubZips(schools)
  *
- * returns the 2 letter state abbreviation
+ * takes in highschools and isolates their zip codes from their addresses
  *
  * @param the state to abbreviate
  *
- * @returns 2 letter state abbreviation
+ * @returns the zip codes for the highschools
  */
-var abbreviation = function(state){
-		return stateAbrv[state];
+var scrubZips = function(schools){
+	
+	var zips = [];
+	for (var i=0; i < schools.length; i++)
+	{
+		var lastDigit = schools[i].address.length;
+		var firstDigit = lastDigit-5;
+		var scrubbed = schools[i].address;
+		zips.push(scrubbed.substr(firstDigit,5));
+	}
+	console.log(zips);
+	return zips;
 };
 
 
@@ -62,26 +83,6 @@ var zipLayer = function(FTLayer, eID, map) {
 	this.map = map;
 };//zipLayer
 
-
-var stateAbrv = {
-		"Alaska" : "AK",
-		"Arizona" : "AZ",
-		"Californa" : "CA",
-		"Colorado" : "CO",
-		"Hawaii" : "HI",
-		"Idaho" : "ID",
-		"Illinois" : "IL",
-		"Maine" : "ME",
-		"Minnesota" : "MN",
-		"Nebraska" : "NE",
-		"New Mexico" : "NM",
-		"New York" : "NY",
-		"Nevada" : "NV",
-		"Oregon" : "OR",
-		"Texas" : "TX",
-		"Utah" : "UT",
-		"Washington" : "WA"
-};
 
 
 var ZipTables = {

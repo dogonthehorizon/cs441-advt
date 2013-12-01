@@ -54,7 +54,7 @@ define([
             // Send formatted response to the map layer!
             markers.init(response);
             
-            advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val(),data);
+            advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val(),response.highschools);
         }
     };
  });
