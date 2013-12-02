@@ -14,9 +14,11 @@
 define(['jquery', 
 		'Constants',
 		'advtZipLayer',
+		'components/advt-highschoolLayer',
+		'components/advt-mark',
  		'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw&sensor=false!callback'
  		
- 		], function($, constants, advtZipLayer) {
+ 		], function($, constants, advtZipLayer,highschoolLayer,markers) {
 	var mapOptions = {
 		zoom : 6,
 		center : new google.maps.LatLng(45.5200, -122.6819),
@@ -36,17 +38,26 @@ define(['jquery',
 	var zipLayer = new advtZipLayer.zipLayer(new google.maps.FusionTablesLayer, "zipEID", constants.MAP);
 	
 	zipLayer.FTLayer.setMap(constants.MAP);
-	
+	var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer);
 	//add an event listener for clicks - for now all this does is display the zip code in a popup
 	google.maps.event.addListener(zipLayer.FTLayer, 'click',function(displayedArea) {
 		// Get the necessary information from the clicked area
+		console.log(displayedArea);
 		var information =displayedArea.row['ZipCodeArea'].value;
 		console.log(information);
 		displayedArea.infoWindowHtml ="ZIP Code: " + information;
 	});
+		google.maps.event.addListener(highSchoolLayer.FTLayer, 'click',function(displayedArea) {
+		// Get the necessary information from the clicked area
+		console.log(highSchoolLayer.schoolInfo);
+		var information = displayedArea.row['HighSchool'].value;
+		displayedArea.infoWindowHtml = "High School Name : " + information;
+		
+	});
 
 	return{
-		zipLayer:zipLayer
+		zipLayer:zipLayer,
+		highSchoolLayer:highSchoolLayer
 	};
 });
 

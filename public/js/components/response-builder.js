@@ -1,3 +1,4 @@
+                                   
 /**
  * response-builder
  *
@@ -12,8 +13,9 @@ define([
 	'jquery',
     'components/advt-mark',
     'advtZipLayer',
-    'components/advt-maps'
-], function($, markers, advtZipLayer, maps) {
+    'components/advt-maps',
+    'components/advt-highschoolLayer'
+], function($, markers, advtZipLayer, maps,highSchoolLayer) {
     return {
         /**
           * build
@@ -50,11 +52,35 @@ define([
                     response.highschools.push({name: curName, address: data.rows[i][3], students: 1});
                 }
             }
-
             // Send formatted response to the map layer!
-            markers.init(response);
+			advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val(),response.highschools);
+			if(markers.isAllowed($('#advt-state-select').val())!="good" )
+            {
+            	console.log("attempt to make bad state Markers");
+            	 markers.init(response);
+            }
+            else
+            {
+            	console.log(maps.zipLayer);
+           		console.log(maps.highSchoolLayer);
+            	var city = $('#advt-city-input').val();
             
-            advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val(),response.highschools);
+            	if(city != "")
+            	{
+            		highSchoolLayer.changeCity.call(maps.highSchoolLayer, city,response);
+            		 google.maps.event.addListener(highSchoolLayer, 'click', function(e) {
+        			 alert("my BODY");
+       					 });
+           		 }
+            	else
+           		 {
+            		highSchoolLayer.changeState.call(maps.highSchoolLayer, $('#advt-state-select').val(),response);
+            		google.maps.event.addListener(highSchoolLayer, 'click', function(e) {
+        			alert("my BODY");
+       					 });
+           		 }
+            }
+  
         }
     };
  });
