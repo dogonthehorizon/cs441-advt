@@ -15,8 +15,9 @@ define([
     'components/advt-ziplayer',
     'components/advt-maps',
     'components/advt-highschoolLayer',
-    'components/advt-getRightZips'
-], function($, markers, advtZipLayer, maps,highSchoolLayer,getRightZips) {
+    'components/advt-getRightZips',
+    'components/advt-util',
+], function($, markers, advtZipLayer, maps,highSchoolLayer,getRightZips,util) {
 	
 	var createReqString = function(response)
 	{
@@ -86,7 +87,7 @@ define([
             else
             {
             	//grab the city they searched for
-            	var city = $('#advt-city-input').val();
+            	var city = util.toTitleCase($('#advt-city-input').val());
             	// make a querry for all possible zips in that city
             	if(city != "")
             	{
