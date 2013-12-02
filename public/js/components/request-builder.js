@@ -115,6 +115,7 @@ define([
             };
 
             // Use JQuery to make a request to the Fusion Table
+            console.log(reqString);
             $.get(reqString, response);
         }
     };

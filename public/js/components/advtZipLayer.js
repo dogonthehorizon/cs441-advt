@@ -33,7 +33,7 @@ var changeState = function(state) {
 		}
 	});
 	this.FTLayer.setMap(constants.MAP);
-}
+};
 
 /* abbreviation(state)
  *
@@ -45,7 +45,7 @@ var changeState = function(state) {
  */
 var abbreviation = function(state){
 		return stateAbrv[state];
-	}
+};
 
 
 /* zipLayer constructor
@@ -60,7 +60,7 @@ var zipLayer = function(FTLayer, eID, map) {
 	this.FTLayer = FTLayer;
 	this.eID = eID;
 	this.map = map;
-}//zipLayer
+};//zipLayer
 
 
 var stateAbrv = {
@@ -81,7 +81,7 @@ var stateAbrv = {
 		"Texas" : "TX",
 		"Utah" : "UT",
 		"Washington" : "WA"
-	}
+};
 
 
 var ZipTables = {

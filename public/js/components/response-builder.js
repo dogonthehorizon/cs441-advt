@@ -12,8 +12,9 @@ define([
 	'jquery',
     'components/advt-mark',
     'advtZipLayer',
-    'components/advt-maps'
-], function($, markers, advtZipLayer, maps) {
+    'components/advt-maps',
+    'components/advt-highschoolLayer'
+], function($, markers, advtZipLayer, maps,highSchoolLayer) {
     return {
         /**
           * build
@@ -51,11 +52,30 @@ define([
                 }
             }
 
-            // Send formatted response to the map layer!
-            markers.init(response);
+			if(markers.isAllowed($('#advt-state-select').val())!="good" )
+            {
+            	console.log("attempt to make bad state Markers");
+            	 markers.init(response);
+            }
+            else
+            {
+            	console.log(maps.zipLayer);
+           		console.log(maps.highSchoolLayer);
+            	var city = $('#advt-city-input').val();
             
-            console.log(maps.zipLayer);
-            advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val());
+            	if(city != "")
+            	{
+            		highSchoolLayer.changeCity.call(maps.highSchoolLayer, city);
+           		 }
+            	else
+           		 {
+            		highSchoolLayer.changeState.call(maps.highSchoolLayer, $('#advt-state-select').val());
+           		 }
+            }
+			advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val());
+            // Send formatted response to the map layer!
+            
+            
         }
     };
  });

@@ -14,9 +14,10 @@
 define(['jquery', 
 		'Constants',
 		'advtZipLayer',
+		'components/advt-highschoolLayer',
  		'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw&sensor=false!callback'
  		
- 		], function($, constants, advtZipLayer) {
+ 		], function($, constants, advtZipLayer,highschoolLayer) {
 	var mapOptions = {
 		zoom : 6,
 		center : new google.maps.LatLng(45.5200, -122.6819),
@@ -40,9 +41,16 @@ define(['jquery',
 	}), zipEID, constants.MAP);
 	
 	zipLayer.FTLayer.setMap(constants.MAP);
-	
+	var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer({
+		query : {
+			from : '1dbdd9haZtt2nt3OHsm1qW8bMmIMob24rJ709ErI'
+		},
+		
+  				
+	}));
 	return{
-		zipLayer:zipLayer
+		zipLayer:zipLayer,
+		highSchoolLayer:highSchoolLayer
 	};
 });
 
