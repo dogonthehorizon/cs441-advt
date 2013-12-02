@@ -1,3 +1,11 @@
+/**
+ * advt-results-pane-builder
+ *
+ * Functions to manipulate the results pane located on the right hand side of the app.
+ *
+ * @author Fernando Freire
+ * @since 02 Dec. 2013
+ */
 define([
     'jquery',
     'components/advt-util'
@@ -8,6 +16,18 @@ define([
     var $resultsPane = $("#results div");
 
     return {
+
+        /**
+         * update
+         *
+         * Updates the results pane with the results for the given zip code region.
+         *
+         * @param results - An array of school objects to display in the results pane.
+         * @return void
+         *
+         * @author Fernando Freire
+         * @since 02 Dec. 2013
+         */
         update: function(results) {
 
             $resultsPane.empty();
