@@ -32,6 +32,13 @@ define([
 
             $resultsPane.empty();
 
+            if(results.length <= 0) {
+                var $p = $("<p>We do not have sufficient data to complete your search. " +
+                    "Making a best approximation of the data requested. </p>");
+
+                $resultsPane.append($p);
+            }
+
             $.each(results, function(idx, val) {
                 var $div = $("<div class='advt-result-item'></div>");
                 var schoolName = util.toTitleCase(val.name);
