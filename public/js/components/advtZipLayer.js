@@ -4,42 +4,37 @@
  * A collection of materials related to the zip code layer, including a method for changing the
  * state for which the zip codes are displayed, a constructor for a zipLayer object
  *
- * @author Carl Lulay
+ * @author Carl Lulay and Sam Golloway
  * @since 11/26/13
  */
 
-define(['Constants'], function(constants) {
+define(['jquery','Constants','components/advt-highschoolLayer','components/advt-mark',
+'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw&sensor=false!callback'
 
+], function($,constants, highschoolLayer,markers) {
 
+var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer);
 
 /* changeState(state)
  *
  * changes the state for which the zip codes are being displayed
  *
  * @param the state to display
- *
+ * @param schools: the array of schools gathered by the resposne builder
+ * @param zips: the zipcodes to be displayed
+ * @param response: the new clean set of responses
  * @returns void
  */
-var changeState = function(state, schools) {
+var changeState = function(state, schools, zip, response) {
 	console.log("changeState");
-	//console.log(this.eID);
-	console.log(schools);
+
 	newEID = ZipTables[state];
 	this.eID = newEID;
-<<<<<<< HEAD
-	console.log("changeState");
-	this.FTLayer.setOptions({
-		query : {
-			from : this.eID
-		}
-	});
-	this.FTLayer.setMap(constants.MAP);
-=======
-	
 	//make sure we have the zip code data for the state we're searching in
 	if(newEID!=undefined)
 	{
 		var zips = scrubZips(schools);
+		zips = zip;
 		//switch the table we're using to that of the new state
 		 this.FTLayer.setOptions({
 			 query : {
@@ -51,9 +46,33 @@ var changeState = function(state, schools) {
 	else
 	{
 		console.log("no zip data");
+			alert("We do not have sufficient data to completele your search\n"
+            	   +"accurately we will make our best guess. This could take awhile ");
+		markers.init(response);
+		
 	}
+	//add an event listener for clicks - for now all this does is display the zip code in a popup
+	google.maps.event.addListener(this.FTLayer, 'click',function(displayedArea) {
+		
+		var information = displayedArea.row['ZipCodeArea'].value;
+		for(var i = 0; i < response.length; i++)
+		{
+			if(information === response[i].zip)
+			{
+				// Get the necessary information from the clicked area
+		       //********* FEEEEERRRRRRRRNNNNNNAAAAAANNNNNDOOOOOOOO
+		       // call your thing here
+		       // EACH response[i] is a highschool object that should be
+		       // displayed
+			   console.log(response[i]);
+			}
+		}
+		//dipslay the zipcode for the given out line and throw down markers for the map
+		displayedArea.infoWindowHtml ="ZIP Code: " + information;
+		highschoolLayer.changeCity.call(highSchoolLayer, information);
+	  });
 	 this.FTLayer.setMap(constants.MAP);
->>>>>>> adf53fbf1fe0290d056eff944a5601ed07f102c9
+
 };
 
 /* scrubZips(schools)
@@ -64,10 +83,7 @@ var changeState = function(state, schools) {
  *
  * @returns the zip codes for the highschools
  */
-<<<<<<< HEAD
-var abbreviation = function(state){
-		return stateAbrv[state];
-=======
+
 var scrubZips = function(schools){
 	
 	var zips = [];
@@ -80,7 +96,7 @@ var scrubZips = function(schools){
 	}
 	console.log(zips);
 	return zips;
->>>>>>> adf53fbf1fe0290d056eff944a5601ed07f102c9
+
 };
 
 
@@ -99,29 +115,7 @@ var zipLayer = function(FTLayer, eID, map) {
 };//zipLayer
 
 
-<<<<<<< HEAD
-var stateAbrv = {
-		"Alaska" : "AK",
-		"Arizona" : "AZ",
-		"Californa" : "CA",
-		"Colorado" : "CO",
-		"Hawaii" : "HI",
-		"Idaho" : "ID",
-		"Illinois" : "IL",
-		"Maine" : "ME",
-		"Minnesota" : "MN",
-		"Nebraska" : "NE",
-		"New Mexico" : "NM",
-		"New York" : "NY",
-		"Nevada" : "NV",
-		"Oregon" : "OR",
-		"Texas" : "TX",
-		"Utah" : "UT",
-		"Washington" : "WA"
-};
 
-=======
->>>>>>> adf53fbf1fe0290d056eff944a5601ed07f102c9
 
 var ZipTables = {
 		"AK" : "1FNPaWfRBUgGPugh0TJ5kHzs5W2E9ZdyrvNg91Ms", // TLC: 10/29.  Meyer et al.  California, Idaho, Alaska.  Working.

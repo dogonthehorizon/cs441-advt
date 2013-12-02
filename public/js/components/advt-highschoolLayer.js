@@ -17,18 +17,16 @@ define(['Constants'], function(constants) {
  *
  * changes the state for which the zip codes are being displayed
  *
- * @param the state to display
+ * @param State: the state in which the markers are in
  *
  * @returns void
+ * 
+ * DEPRICATED???
  */
-ngeState = function(state,data) {
-	this.schoolInfo = data.highschools[0].name;
-	console.log(this.eID);
-	console.log("halp");
-	//var stateAbrv = abbreviation(state);
-	console.log(state);
+changeState = function(state) {
+	
 	state = "State IN ('"+state+"')";
-	console.log(state);
+	//console.log(state);
 	this.FTLayer.setOptions({
 				query: {
       			select: 'Address', 
@@ -38,30 +36,42 @@ ngeState = function(state,data) {
 	});
 	this.FTLayer.setMap(constants.MAP);
 };
-
-var changeCity = function(city,data) {
-	this.schoolInfo = data.highschools[0].name;
-
-	console.log(this.eID);
-	console.log("halp");
-	//var stateAbrv = abbreviation(state);
-	console.log(city);
-	city = "City IN ('"+city+"')";
-	console.log(city);
+/* changeState(state)
+ *
+ * changes the zipcode for the markers for which the zip codes are being displayed
+ *
+ * @param zip: the zipCode for the highschool to be displayed
+ *
+ * @returns void
+ */
+var changeCity = function(zip) {
+	
+	var whereString = "HighSchool IN (";
+	var temp ="";
+	zipWhere = "Zip IN ('"+zip+"')";
+	
 	this.FTLayer.setOptions({
 				query: {
       			select: 'Address', 
      		    from: '1rYG3k8Ac7mo2thTVcMm5fgRLwP9uCnQTmyRcEtQ',
-     		    where: city
-		},styles: [{
+     		    where: zipWhere
+		        },styles: [{
   				markerOptions: {
    				 		iconName: "large_green"
   						}
-				}]
-
-  				
+				}]	
 	});
-	this.FTLayer.setMap(constants.MAP);
+	 google.maps.event.addListener(this.FTLayer, 'click',function(displayedArea) {
+			// Get the necessary information from the clicked area
+
+			var zip = displayedArea.row['Zip'].value;
+			// display the highschools name
+			var information = displayedArea.row['HighSchool'].value;
+			displayedArea.infoWindowHtml = "High School Name : " + information;
+		
+		});
+			
+		this.FTLayer.setMap(constants.MAP);
 };
 /* abbreviation(state)
  *

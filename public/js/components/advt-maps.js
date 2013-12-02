@@ -24,7 +24,6 @@ define(['jquery',
 		center : new google.maps.LatLng(45.5200, -122.6819),
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	};
-
 	// Passing in a jQuery element yields errors since it
 	// is returning a collection of DOM elements rather than
 	// a single node. Since we know there is only one map-canvas
@@ -38,26 +37,17 @@ define(['jquery',
 	var zipLayer = new advtZipLayer.zipLayer(new google.maps.FusionTablesLayer, "zipEID", constants.MAP);
 	
 	zipLayer.FTLayer.setMap(constants.MAP);
-	var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer);
 	//add an event listener for clicks - for now all this does is display the zip code in a popup
-	google.maps.event.addListener(zipLayer.FTLayer, 'click',function(displayedArea) {
-		// Get the necessary information from the clicked area
-		console.log(displayedArea);
-		var information =displayedArea.row['ZipCodeArea'].value;
-		console.log(information);
-		displayedArea.infoWindowHtml ="ZIP Code: " + information;
-	});
-		google.maps.event.addListener(highSchoolLayer.FTLayer, 'click',function(displayedArea) {
-		// Get the necessary information from the clicked area
-		console.log(highSchoolLayer.schoolInfo);
-		var information = displayedArea.row['HighSchool'].value;
-		displayedArea.infoWindowHtml = "High School Name : " + information;
-		
-	});
+	
+	
+	    
+	   		 var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer);
+
 
 	return{
 		zipLayer:zipLayer,
-		highSchoolLayer:highSchoolLayer
+		highSchoolLayer:highSchoolLayer,
+		
 	};
 });
 
