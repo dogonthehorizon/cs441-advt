@@ -5095,15 +5095,22 @@ body {
 }
 
 /* line 24, ../../sass/_cs441-data-visualization.scss */
+.advt-shadow {
+  -webkit-box-shadow: #cccccc 1px 3px 5px;
+  -moz-box-shadow: #cccccc 1px 3px 5px;
+  box-shadow: #cccccc 1px 3px 5px;
+}
+
+/* line 28, ../../sass/_cs441-data-visualization.scss */
 form {
   margin-top: 20px;
   background-color: white;
 }
-/* line 28, ../../sass/_cs441-data-visualization.scss */
+/* line 32, ../../sass/_cs441-data-visualization.scss */
 form .advt-form-buttons {
   padding-top: 25px;
 }
-/* line 31, ../../sass/_cs441-data-visualization.scss */
+/* line 35, ../../sass/_cs441-data-visualization.scss */
 form .advt-form-buttons .advt-submit-button {
   border-style: solid;
   border-width: 1px;
@@ -5137,7 +5144,7 @@ form .advt-form-buttons .advt-submit-button:hover, form .advt-form-buttons .advt
 form .advt-form-buttons .advt-submit-button:hover, form .advt-form-buttons .advt-submit-button:focus {
   color: white;
 }
-/* line 35, ../../sass/_cs441-data-visualization.scss */
+/* line 39, ../../sass/_cs441-data-visualization.scss */
 form .advt-form-buttons .advt-export-button {
   border-style: solid;
   border-width: 1px;
@@ -5171,15 +5178,15 @@ form .advt-form-buttons .advt-export-button:hover, form .advt-form-buttons .advt
 form .advt-form-buttons .advt-export-button:hover, form .advt-form-buttons .advt-export-button:focus {
   color: white;
 }
-/* line 40, ../../sass/_cs441-data-visualization.scss */
+/* line 44, ../../sass/_cs441-data-visualization.scss */
 form #advt-intended-majors {
   height: 156px;
 }
-/* line 44, ../../sass/_cs441-data-visualization.scss */
+/* line 48, ../../sass/_cs441-data-visualization.scss */
 form .ui-slider-range {
   background-color: #4285f4 !important;
 }
-/* line 48, ../../sass/_cs441-data-visualization.scss */
+/* line 52, ../../sass/_cs441-data-visualization.scss */
 form #advt-form-collapse {
   height: 16px;
   font-size: .5em;
@@ -5189,11 +5196,4 @@ form #advt-form-collapse {
   padding: 4px;
   width: 103.8%;
   text-align: center;
-}
-
-/* line 60, ../../sass/_cs441-data-visualization.scss */
-.advt-shadow {
-  -webkit-box-shadow: #cccccc 1px 3px 5px;
-  -moz-box-shadow: #cccccc 1px 3px 5px;
-  box-shadow: #cccccc 1px 3px 5px;
 }

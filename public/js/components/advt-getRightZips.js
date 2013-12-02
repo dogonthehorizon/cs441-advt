@@ -15,7 +15,7 @@
 define([
 	'jquery',
     'components/advt-mark',
-    'advtZipLayer',
+    'components/advt-ziplayer',
     'components/advt-maps',
 ], function($, markers, advtZipLayer, maps) {
 	

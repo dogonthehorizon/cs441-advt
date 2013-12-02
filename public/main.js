@@ -15,8 +15,7 @@ require.config({
         'knockout':'vendor/knockout-2.3.0.min',
         'foundation':'foundation/foundation', //TODO: Remove unused foundation
                                               //      js from project.
-        'foundation-forms':'foundation/foundation.forms',
-        'advtZipLayer':'components/advtZipLayer'
+        'foundation-forms':'foundation/foundation.forms'
     },
     shim: {
         foundation: {
@@ -25,6 +24,9 @@ require.config({
         },
         'foundation-forms': {
             deps: ['foundation']
+        },
+        'jquery-ui': {
+            deps: ['jquery']
         }
     }
 });
@@ -46,21 +48,37 @@ define([
     'components/advt-form-data-builder',
     'components/request-builder',
     'viewmodels/SliderViewModel',
-    'advtZipLayer',
     'foundation',
     'foundation-forms',
     'components/advt-maps',
     'components/advt-mark',
+    'components/advt-ziplayer',
+    'components/advt-results-pane-builder',
     'foundation',
     'jquery-ui'
-    
-], function($, ko, formDropdowns, formDataBuilder, reqBuilder, SliderViewModel, advtZipLayer){
+], function($, ko, formDropdowns, formDataBuilder, reqBuilder, SliderViewModel){
 
     $(document).ready(function() {
         // Initialize all form dropdowns.
         formDropdowns.initApplicationType($('#advt-application-type'));
         formDropdowns.initIntendedMajor($('#advt-intended-majors'));
         formDropdowns.initStateSelect($('#advt-state-select'));
+
+        // Initialize the entry year to something sensible.
+        $("#advt-search-form input[type='number']").val(2011);
+
+        $("#advt-loading-dialog").hide();
+        // Initialize a loading dialog to appear whenever we fire
+        // an AJAX request.
+        $(document)
+            .ajaxStart(function() {
+                $("#advt-loading-dialog").dialog({
+                    modal: true
+                });
+            })
+            .ajaxStop(function(){
+                $("#advt-loading-dialog").dialog("destroy");
+            });
 
         // Attach a listener on submit to the form.
         $('#advt-search-form').on('submit', function(el) {

@@ -13,12 +13,12 @@
  */
 define(['jquery', 
 		'Constants',
-		'advtZipLayer',
+		'components/advt-ziplayer',
 		'components/advt-highschoolLayer',
 		'components/advt-mark',
  		'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw&sensor=false!callback'
  		
- 		], function($, constants, advtZipLayer,highschoolLayer,markers) {
+ 		], function($, constants, advtZipLayer, highschoolLayer, markers) {
 	var mapOptions = {
 		zoom : 6,
 		center : new google.maps.LatLng(45.5200, -122.6819),

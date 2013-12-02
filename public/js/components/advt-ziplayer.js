@@ -8,10 +8,15 @@
  * @since 11/26/13
  */
 
-define(['jquery','Constants','components/advt-highschoolLayer','components/advt-mark',
-'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw&sensor=false!callback'
+define([
+    'jquery',
+    'Constants',
+    'components/advt-highschoolLayer',
+    'components/advt-mark',
+    'components/advt-results-pane-builder',
+    'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw&sensor=false!callback'
 
-], function($,constants, highschoolLayer,markers) {
+], function($,constants, highschoolLayer, markers, resultsPane) {
 
 var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer);
 
@@ -20,13 +25,12 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
  * changes the state for which the zip codes are being displayed
  *
  * @param the state to display
- * @param schools: the array of schools gathered by the resposne builder
+ * @param schools: the array of schools gathered by the response builder
  * @param zips: the zipcodes to be displayed
  * @param response: the new clean set of responses
  * @returns void
  */
 var changeState = function(state, schools, zip, response) {
-	console.log("changeState");
 
 	newEID = ZipTables[state];
 	this.eID = newEID;
@@ -55,6 +59,7 @@ var changeState = function(state, schools, zip, response) {
 	google.maps.event.addListener(this.FTLayer, 'click',function(displayedArea) {
 		
 		var information = displayedArea.row['ZipCodeArea'].value;
+        var regionSchools = [];
 		for(var i = 0; i < response.length; i++)
 		{
 			if(information === response[i].zip)
@@ -65,8 +70,12 @@ var changeState = function(state, schools, zip, response) {
 		       // EACH response[i] is a highschool object that should be
 		       // displayed
 			   console.log(response[i]);
+               regionSchools.push(response[i]);
 			}
 		}
+
+        resultsPane.update(regionSchools);
+
 		//dipslay the zipcode for the given out line and throw down markers for the map
 		displayedArea.infoWindowHtml ="ZIP Code: " + information;
 		highschoolLayer.changeCity.call(highSchoolLayer, information);

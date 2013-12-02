@@ -12,7 +12,7 @@
 define([
 	'jquery',
     'components/advt-mark',
-    'advtZipLayer',
+    'components/advt-ziplayer',
     'components/advt-maps',
     'components/advt-highschoolLayer',
     'components/advt-getRightZips'
