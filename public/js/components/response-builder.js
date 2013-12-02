@@ -15,8 +15,9 @@ define([
     'components/advt-ziplayer',
     'components/advt-maps',
     'components/advt-highschoolLayer',
-    'components/advt-getRightZips'
-], function($, markers, advtZipLayer, maps,highSchoolLayer,getRightZips) {
+    'components/advt-getRightZips',
+    'components/advt-results-pane-builder'
+], function($, markers, advtZipLayer, maps, highSchoolLayer, getRightZips, resultsPane) {
 	
 	var createReqString = function(response)
 	{
@@ -78,9 +79,7 @@ define([
         	// make sure that the state is in the list of states we have accurate data for
 			if(markers.isAllowed($('#advt-state-select').val())!="good" )
             {
-            	// create our best guess
-            	alert("We do not have sufficient data to completele your search\n"
-            	      +"accurately we will make our best guess. This could take awhile ")
+                resultsPane.update([]);
             	markers.init(response);
             }
             else

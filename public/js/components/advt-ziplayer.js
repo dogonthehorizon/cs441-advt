@@ -49,11 +49,8 @@ var changeState = function(state, schools, zip, response) {
 			 }
 		 });
 	} else {
-		console.log("no zip data");
-			alert("We do not have sufficient data to completele your search\n"
-            	   +"accurately we will make our best guess. This could take awhile ");
+        resultsPane.update([]);
 		markers.init(response);
-		
 	}
 
 	//add an event listener for clicks - for now all this does is display the zip code in a popup
