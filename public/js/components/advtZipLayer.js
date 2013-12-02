@@ -12,7 +12,6 @@ define(['Constants'], function(constants) {
 
 
 
-
 /* changeState(state)
  *
  * changes the state for which the zip codes are being displayed
@@ -21,11 +20,13 @@ define(['Constants'], function(constants) {
  *
  * @returns void
  */
-var changeState = function(state) {
-	console.log(this.eID);
-	//var stateAbrv = abbreviation(state);
+var changeState = function(state, schools) {
+	console.log("changeState");
+	//console.log(this.eID);
+	console.log(schools);
 	newEID = ZipTables[state];
 	this.eID = newEID;
+<<<<<<< HEAD
 	console.log("changeState");
 	this.FTLayer.setOptions({
 		query : {
@@ -33,18 +34,53 @@ var changeState = function(state) {
 		}
 	});
 	this.FTLayer.setMap(constants.MAP);
+=======
+	
+	//make sure we have the zip code data for the state we're searching in
+	if(newEID!=undefined)
+	{
+		var zips = scrubZips(schools);
+		//switch the table we're using to that of the new state
+		 this.FTLayer.setOptions({
+			 query : {
+				 from : this.eID,
+				 where : 'ZipCodeArea  IN (' + zips + ')'
+			 }
+		 });
+	}
+	else
+	{
+		console.log("no zip data");
+	}
+	 this.FTLayer.setMap(constants.MAP);
+>>>>>>> adf53fbf1fe0290d056eff944a5601ed07f102c9
 };
 
-/* abbreviation(state)
+/* scrubZips(schools)
  *
- * returns the 2 letter state abbreviation
+ * takes in highschools and isolates their zip codes from their addresses
  *
  * @param the state to abbreviate
  *
- * @returns 2 letter state abbreviation
+ * @returns the zip codes for the highschools
  */
+<<<<<<< HEAD
 var abbreviation = function(state){
 		return stateAbrv[state];
+=======
+var scrubZips = function(schools){
+	
+	var zips = [];
+	for (var i=0; i < schools.length; i++)
+	{
+		var lastDigit = schools[i].address.length;
+		var firstDigit = lastDigit-5;
+		var scrubbed = schools[i].address;
+		zips.push(scrubbed.substr(firstDigit,5));
+	}
+	console.log(zips);
+	return zips;
+>>>>>>> adf53fbf1fe0290d056eff944a5601ed07f102c9
 };
 
 
@@ -63,6 +99,7 @@ var zipLayer = function(FTLayer, eID, map) {
 };//zipLayer
 
 
+<<<<<<< HEAD
 var stateAbrv = {
 		"Alaska" : "AK",
 		"Arizona" : "AZ",
@@ -83,6 +120,8 @@ var stateAbrv = {
 		"Washington" : "WA"
 };
 
+=======
+>>>>>>> adf53fbf1fe0290d056eff944a5601ed07f102c9
 
 var ZipTables = {
 		"AK" : "1FNPaWfRBUgGPugh0TJ5kHzs5W2E9ZdyrvNg91Ms", // TLC: 10/29.  Meyer et al.  California, Idaho, Alaska.  Working.

@@ -1,3 +1,7 @@
+                                                                     
+                                                                     
+                                                                     
+                                             
 /**
  * advt-markers
  *
@@ -13,6 +17,8 @@ define([
 	'Constants'
 	], function(constants) {
 
+	var schoolInfo = [];
+
 	var isAllowed= function(state){
 		var stateAbrv = {
 		"AK":"good",
@@ -20,7 +26,9 @@ define([
 		"CA":"good",
 		"CO":"good",
 		"HI":"good",
-		
+
+		"WA":"good",
+
 		"IL":"good",
 	    "ME":"good",
 		"MN":"good",
@@ -51,6 +59,7 @@ define([
          * @param data
          * @param map
          */
+        
         'init' : function(data) {
         	
             var Geocoder = new google.maps.Geocoder();
@@ -97,6 +106,7 @@ define([
 
            
 			console.log(data);
+
 			// clean up the addresses
 			 for (var i = 0; i < data.highschools.length; i++) {
 
@@ -118,8 +128,10 @@ define([
             }//for
            alert("done");
         },//init
-        isAllowed:isAllowed
+
+        isAllowed:isAllowed,
+        schoolInfo:schoolInfo
+
 
     };
 });
-

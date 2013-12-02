@@ -1,3 +1,4 @@
+
 /**
  * advt-highschoolLayer.js
  *
@@ -20,7 +21,8 @@ define(['Constants'], function(constants) {
  *
  * @returns void
  */
-var changeState = function(state) {
+ngeState = function(state,data) {
+	this.schoolInfo = data.highschools[0].name;
 	console.log(this.eID);
 	console.log("halp");
 	//var stateAbrv = abbreviation(state);
@@ -36,7 +38,10 @@ var changeState = function(state) {
 	});
 	this.FTLayer.setMap(constants.MAP);
 };
-var changeCity = function(city) {
+
+var changeCity = function(city,data) {
+	this.schoolInfo = data.highschools[0].name;
+
 	console.log(this.eID);
 	console.log("halp");
 	//var stateAbrv = abbreviation(state);
@@ -46,13 +51,14 @@ var changeCity = function(city) {
 	this.FTLayer.setOptions({
 				query: {
       			select: 'Address', 
-     		    from: '1dbdd9haZtt2nt3OHsm1qW8bMmIMob24rJ709ErI',
+     		    from: '1rYG3k8Ac7mo2thTVcMm5fgRLwP9uCnQTmyRcEtQ',
      		    where: city
 		},styles: [{
   				markerOptions: {
-   				 iconName: "large_green"
-  					}
-					}]
+   				 		iconName: "large_green"
+  						}
+				}]
+
   				
 	});
 	this.FTLayer.setMap(constants.MAP);
