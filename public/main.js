@@ -4,7 +4,7 @@
  * Defines configuration options for use in RequireJS
  *
  * @author Fernando Freire
- * @since 10/26/13
+ * @since 26 Oct. 2013
  */
 require.config({
     baseUrl: 'public/js',
@@ -39,7 +39,7 @@ require.config({
  * Foundation JS and Knockout ViewModels.
  *
  * @author Fernando Freire
- * @since 10/26/13
+ * @since 26 Oct. 2013
  */
 define([
     'jquery',
@@ -54,6 +54,7 @@ define([
     'components/advt-mark',
     'components/advt-ziplayer',
     'components/advt-results-pane-builder',
+    'components/advt-export-dialog',
     'foundation',
     'jquery-ui'
 ], function($, ko, formDropdowns, formDataBuilder, reqBuilder, SliderViewModel){
@@ -67,17 +68,17 @@ define([
         // Initialize the entry year to something sensible.
         $("#advt-search-form input[type='number']").val(2011);
 
+        // Hide the loading dialog, it shouldn't be visible yet!
         $("#advt-loading-dialog").hide();
+
         // Initialize a loading dialog to appear whenever we fire
         // an AJAX request.
         $(document)
             .ajaxStart(function() {
-                $("#advt-loading-dialog").dialog({
-                    modal: true
-                });
+                $("#advt-loading-dialog").dialog({ modal: true });
             })
             .ajaxStop(function(){
-                $("#advt-loading-dialog").dialog("destroy");
+                $("#advt-loading-dialog").dialog('destroy');
             });
 
         // Attach a listener on submit to the form.
@@ -89,7 +90,7 @@ define([
 
         // Attach a listener on click to the export button.
         $('.advt-export-button').on('click', function() {
-            alert("This functionality has not yet been implemented.");
+            $( "#advt-export-dialog" ).dialog('open');
         });
 
         // Attach a listener on click to toggle the form display.
