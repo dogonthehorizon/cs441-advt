@@ -18,7 +18,7 @@ define(['jquery',
 		'components/advt-mark',
  		'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw&sensor=false!callback'
  		
- 		], function($, constants, advtZipLayer, highschoolLayer, markers) {
+ 		], function($, constants, advtZipLayer,highschoolLayer,markers) {
 	var mapOptions = {
 		zoom : 6,
 		center : new google.maps.LatLng(45.5200, -122.6819),
@@ -35,18 +35,18 @@ define(['jquery',
 	
 	//setting up the zip code layer
 	var zipLayer = new advtZipLayer.zipLayer(new google.maps.FusionTablesLayer, "zipEID", constants.MAP);
-	
+
 	zipLayer.FTLayer.setMap(constants.MAP);
 	//add an event listener for clicks - for now all this does is display the zip code in a popup
 	
 	
 	    
-	   		 var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer);
+	
 
 
 	return{
 		zipLayer:zipLayer,
-		highSchoolLayer:highSchoolLayer,
+		//highSchoolLayer:highSchoolLayer,
 		
 	};
 });

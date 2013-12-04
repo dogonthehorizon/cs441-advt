@@ -1,5 +1,5 @@
 /**
- * advtZipLayer.js
+ * advt-zipLayer.js
  *
  * A collection of materials related to the zip code layer, including a method for changing the
  * state for which the zip codes are displayed, a constructor for a zipLayer object
