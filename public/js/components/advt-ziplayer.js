@@ -29,7 +29,12 @@ define(['jquery', 'Constants', 'components/advt-highschoolLayer', 'components/ad
 		//make sure we have the zip code data for the state we're searching in
 		if (newEID != undefined) {
 			var zips = scrubZips(schools);
-			
+			console.log("ZIP0 "+ zips.zip0);
+			console.log("ZIP1 "+ zips.zip1);
+			console.log("ZIP2 "+ zips.zip2);
+			console.log("ZIP3 "+ zips.zip3);
+			console.log("ZIP4 "+ zips.zip4);
+			console.log("ZIP5 "+ zips.zip5);
 			this.FTLayer.setOptions({
 				query : {
 					//switch the table we're using to that of the new state
@@ -71,7 +76,7 @@ define(['jquery', 'Constants', 'components/advt-highschoolLayer', 'components/ad
 		} else {
 			console.log("no zip data");
 			alert("We do not have sufficient data to completele your search\n" + "accurately we will make our best guess. This could take awhile ");
-			markers.init(response);
+			//markers.init(response);
 
 		}
 		//add an event listener for clicks - for now all this does is display the zip code in a popup
@@ -181,7 +186,8 @@ define(['jquery', 'Constants', 'components/advt-highschoolLayer', 'components/ad
 			zip1 : zip1,
 			zip2 : zip2,
 			zip3 : zip3,
-			zip4 : zip4
+			zip4 : zip4,
+			zip5 : zip5
 		};
 	};
 
