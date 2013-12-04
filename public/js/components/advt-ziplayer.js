@@ -97,7 +97,7 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
         google.maps.event.addListener(this.FTLayer, 'click',function(displayedArea) {
                 
                 var information = displayedArea.row['ZipCodeArea'].value;
-        var regionSchools = [];
+        		var regionSchools = [];
                 for(var i = 0; i < response.length; i++)
                 {
                         if(information === response[i].zip)
@@ -109,10 +109,10 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
                         }
                 }
 
-        resultsPane.update(regionSchools);
+        		resultsPane.update(regionSchools);
 
                 //display the zipcode for the given out line and throw down markers for the map
-                displayedArea.infoWindowHtml =null;
+                displayedArea.infoWindowHtml ="ZIP Code: " + information;
                 highschoolLayer.changeCity.call(highSchoolLayer, information);
           });
                 this.FTLayer.setMap(constants.MAP);
