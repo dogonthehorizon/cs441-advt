@@ -1,11 +1,12 @@
+
 /**
- * advt-zipLayer.js
+ * advtZipLayer.js
  *
  * A collection of materials related to the zip code layer, including a method for changing the
  * state for which the zip codes are displayed, a constructor for a zipLayer object
  *
- * @author Carl Lulay and Sam Golloway
- * @since 11/26/13
+ * @author Carl Lulay, Sam Golloway
+ * @since 26 Nov. 2013
  */
 
 define([
@@ -16,11 +17,12 @@ define([
     'components/advt-results-pane-builder',
     'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw&sensor=false!callback'
 
-], function($,constants, highschoolLayer, markers, resultsPane) {
+], function($, constants, highschoolLayer, markers, resultsPane) {
 
 var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer);
 
-/* changeState(state)
+/**
+ *  changeState(state)
  *
  * changes the state for which the zip codes are being displayed
  *
@@ -34,6 +36,7 @@ var changeState = function(state, schools, zip, response) {
 
 	newEID = ZipTables[state];
 	this.eID = newEID;
+
 	//make sure we have the zip code data for the state we're searching in
 	if(newEID!=undefined)
 	{
@@ -46,15 +49,11 @@ var changeState = function(state, schools, zip, response) {
 				 where : 'ZipCodeArea  IN (' + zips + ')'
 			 }
 		 });
-	}
-	else
-	{
-		console.log("no zip data");
-			alert("We do not have sufficient data to completele your search\n"
-            	   +"accurately we will make our best guess. This could take awhile ");
+	} else {
+        resultsPane.update([]);
 		markers.init(response);
-		
 	}
+
 	//add an event listener for clicks - for now all this does is display the zip code in a popup
 	google.maps.event.addListener(this.FTLayer, 'click',function(displayedArea) {
 		
@@ -64,27 +63,26 @@ var changeState = function(state, schools, zip, response) {
 		{
 			if(information === response[i].zip)
 			{
-				// Get the necessary information from the clicked area
-		       //********* FEEEEERRRRRRRRNNNNNNAAAAAANNNNNDOOOOOOOO
-		       // call your thing here
+			// Get the necessary information from the clicked area
 		       // EACH response[i] is a highschool object that should be
 		       // displayed
-			   console.log(response[i]);
                regionSchools.push(response[i]);
 			}
 		}
 
         resultsPane.update(regionSchools);
 
-		//dipslay the zipcode for the given out line and throw down markers for the map
+		//display the zipcode for the given out line and throw down markers for the map
 		displayedArea.infoWindowHtml ="ZIP Code: " + information;
 		highschoolLayer.changeCity.call(highSchoolLayer, information);
 	  });
-	 this.FTLayer.setMap(constants.MAP);
+
+    this.FTLayer.setMap(constants.MAP);
 
 };
 
-/* scrubZips(schools)
+/**
+ *  scrubZips(schools)
  *
  * takes in highschools and isolates their zip codes from their addresses
  *
@@ -92,7 +90,6 @@ var changeState = function(state, schools, zip, response) {
  *
  * @returns the zip codes for the highschools
  */
-
 var scrubZips = function(schools){
 	
 	var zips = [];
@@ -109,7 +106,8 @@ var scrubZips = function(schools){
 };
 
 
-/* zipLayer constructor
+/**
+ *  zipLayer constructor
  *
  * @param FTLayer the FusionTablesLayer we're applying.
  * @param eID The encrypted ID of the fusionTable that the zips are from.
@@ -143,13 +141,12 @@ var ZipTables = {
 		"OR" : "1U6n-9O6I9q4qG10uNcNrCAlvactfL7O07IVPLbU", // TLC: 10/27.  Crenshaw.       Working.
 		"TX" : "1VM5jgrP_ROg5kFcTpwpJuw-fDpgvaSeQ4JAgEvw", // TLC: 10/27.  Garcia et al.   Working.
 		"UT" : "1ImtKIQYOTlEFgy1oLF8WeygB3antpx8Nx-qwQYU", // TLC: 10/27.  Gadbois et al.  Working.
-		"WA" : "1jNwC6KeDC3NnVlReslJZB8VvujKjyxQhDs7o5Tc", // TLC: 10/27.  Garcia et al.   Working.
+		"WA" : "1jNwC6KeDC3NnVlReslJZB8VvujKjyxQhDs7o5Tc" // TLC: 10/27.  Garcia et al.   Working.
 };
-
 
 return {
 	  	changeState: changeState,
-   		zipLayer : zipLayer,
+   		zipLayer : zipLayer
    };
 
 });

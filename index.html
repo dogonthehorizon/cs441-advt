@@ -103,5 +103,26 @@
     <div id='advt-loading-dialog'>
         <p>Searching... Please Wait.</p>
     </div>
+    <div id='advt-export-dialog'>
+        <form id='advt-export-form'>
+            <div class='large-12 columns'>
+                <div class='row'>
+                    <input type='checkbox' id='advt-export-form-data'/> Export Data as an Excel File
+                </div>
+                <div class='row'>
+                    <label>Excel File Save Location</label>
+                    <input type='file' id='advt-export-form-data-loc' disabled />
+                </div>
+                <div class='row'> <hr /> </div>
+                <div class='row'>
+                    <input type='checkbox' id='advt-export-form-map' /> Export Map as an Image File
+                </div>
+                <div class='row'>
+                    <label>Map Image Save Location</label>
+                    <input type='file' id='advt-export-form-map-loc' disabled />
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

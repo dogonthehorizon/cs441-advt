@@ -7,7 +7,7 @@
  * or use your own API key before this module will function.
  *
  * @author Fernando Freire, Carl Lulay
- * @since 10/28/13
+ * @since 28 Oct. 2013
  *
  * @depends jquery, google
  */
@@ -18,18 +18,23 @@ define(['jquery',
 		'components/advt-mark',
  		'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw&sensor=false!callback'
  		
+<<<<<<< HEAD
  		], function($, constants, advtZipLayer,highschoolLayer,markers) {
+=======
+], function($, constants, advtZipLayer, highschoolLayer) {
+
+>>>>>>> 8575ee45115d27868d1ddb8c2538dbf9766a0f6f
 	var mapOptions = {
 		zoom : 6,
 		center : new google.maps.LatLng(45.5200, -122.6819),
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	};
+
 	// Passing in a jQuery element yields errors since it
 	// is returning a collection of DOM elements rather than
 	// a single node. Since we know there is only one map-canvas
 	// node on the page, we simply return the first element of
 	// this collection.
-
 	constants.MAP = new google.maps.Map($('#map-canvas')[0], mapOptions);
 
 	
@@ -38,16 +43,24 @@ define(['jquery',
 
 	zipLayer.FTLayer.setMap(constants.MAP);
 	//add an event listener for clicks - for now all this does is display the zip code in a popup
+<<<<<<< HEAD
 	
 	
 	    
 	
+=======
+    var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer);
+>>>>>>> 8575ee45115d27868d1ddb8c2538dbf9766a0f6f
 
 
 	return{
 		zipLayer:zipLayer,
+<<<<<<< HEAD
 		//highSchoolLayer:highSchoolLayer,
 		
+=======
+		highSchoolLayer:highSchoolLayer,
+>>>>>>> 8575ee45115d27868d1ddb8c2538dbf9766a0f6f
 	};
 });
 

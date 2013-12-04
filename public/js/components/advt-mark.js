@@ -12,8 +12,9 @@
  */
 define([
 	'jquery',
-	'Constants'
-	], function($,constants) {
+	'Constants',
+	'components/advt-results-pane-builder',
+	], function($,constants,resultsPane) {
 
 	var schoolInfo = [];
 /*
@@ -82,7 +83,10 @@ define([
                         google.maps.event.addListener(Marker, 'click', function() {
                         	//Fernando you can populat a window with this data
                         	console.log(this.customInfo);
-                            alert(this.customInfo.name);
+                        	regionSchools =[];
+                        	regionSchools.push(this.customInfo);
+                        	resultsPane.update(regionSchools);
+                           // alert(this.customInfo.name);
                         });
 
                     }//if
