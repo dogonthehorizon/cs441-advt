@@ -32,78 +32,144 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
  * @param response: the new clean set of responses
  * @returns void
  */
-var changeState = function(state, schools, zip, response) {
+ var changeState = function(state, schools) {
+                console.log("changeState");
+                //console.log(this.eID);
+                //console.log(schools);
+                newEID = ZipTables[state];
+                this.eID = newEID;
+                //console.log(schools);
 
-	newEID = ZipTables[state];
-	this.eID = newEID;
+                //make sure we have the zip code data for the state we're searching in
+                if (newEID != undefined) {
+                        var zips = scrubZips(schools);
 
-	//make sure we have the zip code data for the state we're searching in
-	if(newEID!=undefined)
-	{
-		var zips = scrubZips(schools);
-		zips = zip;
-		//switch the table we're using to that of the new state
-		 this.FTLayer.setOptions({
-			 query : {
-				 from : this.eID,
-				 where : 'ZipCodeArea  IN (' + zips + ')'
-			 }
-		 });
-	} else {
-        resultsPane.update([]);
-		markers.init(response);
-	}
+                        
+                        //switch the table we're using to that of the new state and
+                        //display the zip code areas at different colors based upon the number of students
+                        // number of students (determined by which zip array they are in)
+                        this.FTLayer.setOptions({
+                                query : {
+                                        from : this.eID,
+                                },
 
-	//add an event listener for clicks - for now all this does is display the zip code in a popup
-	google.maps.event.addListener(this.FTLayer, 'click',function(displayedArea) {
-		
-		var information = displayedArea.row['ZipCodeArea'].value;
-        var regionSchools = [];
-		for(var i = 0; i < response.length; i++)
-		{
-			if(information === response[i].zip)
-			{
-			// Get the necessary information from the clicked area
-		       // EACH response[i] is a highschool object that should be
-		       // displayed
-               regionSchools.push(response[i]);
-			}
-		}
+                                styles : [{
+                                        polygonOptions : {
+                                                fillColor : "#D4D4D4",
+                                                fillOpacity : -10
+                                        }
 
-        resultsPane.update(regionSchools);
+                                }, {
+                                        where : 'ZipCodeArea  IN (' + zips.zip0 + '0' +')',
+                                        polygonOptions : {
+                                                fillColor : "#330033",
+                                                fillOpacity : 1
+                                        }
 
-		//display the zipcode for the given out line and throw down markers for the map
-		displayedArea.infoWindowHtml ="ZIP Code: " + information;
-		highschoolLayer.changeCity.call(highSchoolLayer, information);
-	  });
+                                }, {
+                                        where : 'ZipCodeArea  IN (' + zips.zip1 + '0' +')',
+                                        polygonOptions : {
+                                                fillColor : "#660066",
+                                                fillOpacity : 1
+                                        }
 
-    this.FTLayer.setMap(constants.MAP);
+                                }, {
+                                        where : 'ZipCodeArea  IN (' + zips.zip2 + '0' +')',
+                                        polygonOptions : {
+                                                fillColor : "#990099",
+                                                fillOpacity : 1
+                                        }
 
-};
+                                }, 
+                                {
+                                        where : 'ZipCodeArea  IN (' + zips.zip3 + '0' +')',
+                                        polygonOptions : {
+                                                fillColor : "#CC00CC",
+                                                fillOpacity : 1
+                                        }
+                                },]
 
-/**
- *  scrubZips(schools)
- *
- * takes in highschools and isolates their zip codes from their addresses
- *
- * @param the state to abbreviate
- *
- * @returns the zip codes for the highschools
- */
-var scrubZips = function(schools){
-	
-	var zips = [];
-	for (var i=0; i < schools.length; i++)
-	{
-		var lastDigit = schools[i].address.length;
-		var firstDigit = lastDigit-5;
-		var scrubbed = schools[i].address;
-		zips.push(scrubbed.substr(firstDigit,5));
-	}
-	console.log(zips);
-	return zips;
+                        });
+                } else {
+                        console.log("no zip data");
+                        alert("There is no data regarding this state's ZIP code boundries");
+                }
+                this.FTLayer.setMap(constants.MAP);
+        };
 
-};
+        /* scrubZips(schools)
+         *
+         * takes in highschools and isolates their zip codes from their addresses
+         *
+         * @param the list of highschools
+         *
+         * @returns 4 zip codes arrays for the highschools, sorted by sortZips
+         */
+        var scrubZips = function(schools) {
+
+                var allZips = [];
+                var studentsInZipCodes = [];
+                
+                //a simple helper function to help us check if we've added a zip
+                //code already
+                var contains = function(array, item) {
+                        for (var i = 0; i < array.length; i++) {
+                                if (array[i] === item) {
+                                        return true;
+                                }
+                        }
+                        return false;
+                };
+
+                //go through our list of schools and scrubb the zip code from the address section
+                for (var i = 0; i < schools.length; i++) {
+                        var lastDigit = schools[i].address.length;
+                        var firstDigit = lastDigit - 5;
+                        var scrubbed = schools[i].address.substr(firstDigit, 5);
+                        //keep track of all the zip codes and the number of students in each
+                        if (!contains(allZips, scrubbed)) {
+                                allZips.push(scrubbed);
+                                studentsInZipCodes[scrubbed] = schools[i].students;
+                        } else {
+                                studentsInZipCodes[scrubbed] += schools[i].students;
+                        }
+                }
+
+                var sortedZips = sortZips(studentsInZipCodes);
+                return sortedZips;
+        };
+
+        /*
+         * sortZips(zips)
+         * 
+         * @param zips the list of zip codes from the schools
+         * 
+         * @return 4 arrays of zips sorted by number of students
+         */
+        var sortZips = function(zips) {
+                var zip0 = [];
+                var zip1 = [];
+                var zip2 = [];
+                var zip3 = [];
+
+                for (var i = 0; i < zips.length; i++) {
+                        if (zips[i] > 20) {
+                                zip3.push(i);
+                        } else if (zips[i] > 10) {
+                                zip2.push(i);
+                        } else if (zips[i] > 5) {
+                                zip1.push(i);
+                        } else if (zips[i] > 0) {
+                                zip0.push(i);
+                        }
+                }
+                return {
+                        zip0 : zip0,
+                        zip1 : zip1,
+                        zip2 : zip2,
+                        zip3 : zip3,
+                };
+        };
 
 
 /**
@@ -148,5 +214,4 @@ return {
 	  	changeState: changeState,
    		zipLayer : zipLayer
    };
-
 });
