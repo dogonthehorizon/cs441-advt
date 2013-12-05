@@ -15,6 +15,15 @@ define([
     // @private
     var $resultsPane = $("#results div");
 
+    var _resultObjectBuilder = function(name, numStudents) {
+        var $div = $("<div class='advt-result-item'></div>");
+        $("<h4>" + name + "</h4>").appendTo($div);
+        $("<p><strong>No. Students:</strong> " + numStudents + "</p>").appendTo($div);
+        $("<hr />").appendTo($div);
+
+        return $div;
+    };
+
     return {
 
         /**
@@ -39,15 +48,16 @@ define([
                 $resultsPane.append($p);
             }
 
+            var $totalStudents =  $("<div class='advt-result-total'></div>");
+            $("<h3><strong>Total Students:</strong> " + totalStudents + "</h3>").appendTo($totalStudents);
+            $("<hr />").appendTo($totalStudents);
+
+            $resultsPane.append($totalStudents);
+
             $.each(results, function(idx, val) {
-                var $div = $("<div class='advt-result-item'></div>");
-                var schoolName = util.toTitleCase(val.name);
 
-                $("<h4>" + schoolName + "</h4>").appendTo($div);
-                $("<p><strong>No. Students:</strong> " + val.students + "</p>").appendTo($div);
-                $("<hr />").appendTo($div);
-
-                $resultsPane.append($div);
+                var $resultObject = _resultObjectBuilder(util.toTitleCase(val.name), val.students);
+                $resultsPane.append($resultObject);
             });
         }
     };
