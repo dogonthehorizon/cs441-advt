@@ -19,7 +19,7 @@ define([
 
 ], function($, constants, highschoolLayer, markers, resultsPane) {
 
-var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer);
+
 
 /**
  *  changeState(state)
@@ -45,10 +45,9 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
                 //make sure we have the zip code data for the state we're searching in
                 if (newEID != undefined) {
 
-                	console.log(response);
-                	console.log(response[0].zip);
-                        var zips = scrubZips(response);
-
+                	
+                    var zips = scrubZips(response);
+					console.log(zips);
 
                         //switch the table we're using to that of the new state and
                         //display the zip code areas at different colors based upon the number of students
@@ -67,32 +66,32 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
                                         }
 
                                 }, {
-                                        where : 'ZipCodeArea  IN (' + zips.zip0 + '0' +')',
+                                        where : 'ZipCodeArea  IN (' + zips.zip0 +')',
                                         polygonOptions : {
                                                 fillColor : "#330033",
-                                                fillOpacity : 1
+                                                fillOpacity : .8
                                         }
 
                                 }, {
-                                        where : 'ZipCodeArea  IN (' + zips.zip1 + '0' +')',
+                                        where : 'ZipCodeArea  IN (' + zips.zip1+')',
                                         polygonOptions : {
                                                 fillColor : "#660066",
-                                                fillOpacity : 1
+                                                fillOpacity : .8
                                         }
 
                                 }, {
-                                        where : 'ZipCodeArea  IN (' + zips.zip2 + '0' +')',
+                                        where : 'ZipCodeArea  IN (' + zips.zip2  +')',
                                         polygonOptions : {
                                                 fillColor : "#990099",
-                                                fillOpacity : 1
+                                                fillOpacity : .8
                                         }
 
                                 }, 
                                 {
-                                        where : 'ZipCodeArea  IN (' + zips.zip3 + '0' +')',
+                                        where : 'ZipCodeArea  IN (' + zips.zip3 +')',
                                         polygonOptions : {
                                                 fillColor : "#CC00CC",
-                                                fillOpacity : 1
+                                                fillOpacity : .8
                                         }
                                 },]
 
@@ -113,7 +112,7 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
                         // Get the necessary information from the clicked area
                        // EACH response[i] is a highschool object that should be
                        // displayed
-               regionSchools.push(response[i]);
+                          regionSchools.push(response[i]);
                         }
                 }
 
@@ -121,6 +120,8 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
 
                 //display the zipcode for the given out line and throw down markers for the map
                 displayedArea.infoWindowHtml ="ZIP Code: " + information;
+                console.log("i got it");
+                var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer);
                 highschoolLayer.changeCity.call(highSchoolLayer, information);
           });
 
@@ -164,7 +165,6 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
                             
                                 studentsInZipCodes.push(schools[i].students);
                                 
-                                
                         } else {
                         		 var index = allZips.indexOf(scrubbed);
                                 studentsInZipCodes[index] += schools[i].students;
@@ -201,7 +201,6 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
                                 zip2.push(numZips[i]);
                         } else if (zips[i] > 5) {
                         		
-                        		
                                 zip1.push(numZips[i]);
                                 console.log(numZips[i]);
                         } else if (zips[i] > 0) {
@@ -210,6 +209,26 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
 
                         }
                 }
+                // initialize the arrays that are empty
+                // so the querry does try to look for a null value 
+                // on the fusion talble
+                if(!zip3.length>0)
+                {
+                	zip3.push(0);
+                }
+                if(!zip2.length>0)
+                {
+                	zip2.push(0);
+                }
+                if(!zip1.length>0)
+                {
+                	zip1.push(0);
+                }
+                if(!zip0.length>0)
+                {
+                	zip0.push(0);
+                }
+                
                 return {
                         zip0 : zip0,
                         zip1 : zip1,

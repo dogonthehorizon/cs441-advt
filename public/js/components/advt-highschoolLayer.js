@@ -8,7 +8,7 @@
  * @since 11/26/13
  */
 
-define(['Constants'], function(constants) {
+define(['Constants','jquery'], function(constants,$) {
 
 
 
@@ -46,14 +46,31 @@ changeState = function(state) {
  */
 var changeCity = function(zip) {
 	
-	var whereString = "HighSchool IN (";
+	console.log("i want to hang out too guys");
+	console.log(zip);
+	
 	var temp ="";
-	zipWhere = "Zip IN ('"+zip+"')";
+	var zipWhere = "Zip IN ('"+zip+"')";
+	
+		var whereString = "Zip IN (";
+		var temp ="";
+						
+		var TABLE_ID = '1dbdd9haZtt2nt3OHsm1qW8bMmIMob24rJ709ErI';
+		whereString = whereString +"'"+zip+"')";
+		var key = "&key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw";
+		// select from the highschool
+		var reqString = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT Address FROM "
+                            + TABLE_ID + " WHERE ";
+            reqString = reqString+whereString+key;
+        $.get(reqString,function(data){console.log(data);});
+	
+	
+	
 	
 	this.FTLayer.setOptions({
 				query: {
       			select: 'Address', 
-     		    from: '1rYG3k8Ac7mo2thTVcMm5fgRLwP9uCnQTmyRcEtQ',
+     		    from: '1dbdd9haZtt2nt3OHsm1qW8bMmIMob24rJ709ErI',
      		    where: zipWhere
 		        },styles: [{
   				markerOptions: {
@@ -61,6 +78,7 @@ var changeCity = function(zip) {
   						}
 				}]	
 	});
+	this.FTLayer.setMap(constants.MAP);
 	 google.maps.event.addListener(this.FTLayer, 'click',function(displayedArea) {
 			// Get the necessary information from the clicked area
 
@@ -71,7 +89,7 @@ var changeCity = function(zip) {
 		
 		});
 			
-		this.FTLayer.setMap(constants.MAP);
+		
 };
 /* abbreviation(state)
  *
