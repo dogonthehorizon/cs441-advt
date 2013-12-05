@@ -25,7 +25,6 @@ define([
 	{
 		var whereString = "HighSchool IN (";
 		var temp ="";
-		console.log(response.highschools);
 		for(var i = 0; i < response.highschools.length; i++)
 		{
 			temp = response.highschools[i].name;
@@ -115,7 +114,6 @@ define([
             				{
             					zips.push(data.rows[i][0]);
             				}
-            				console.log(zips);
             				// time to pick out the actual zips
             				getRightZips.getRightZips(zips,response,city);
             			});

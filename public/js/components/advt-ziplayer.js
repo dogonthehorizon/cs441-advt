@@ -35,12 +35,8 @@ define([
 
  var changeState = function(state, schools, zip, response) {
 
-                console.log("changeState");
-                //console.log(this.eID);
-                //console.log(schools);
                 newEID = ZipTables[state];
                 this.eID = newEID;
-                //console.log(schools);
 
                 //make sure we have the zip code data for the state we're searching in
                 if (newEID != undefined) {
@@ -97,7 +93,6 @@ define([
 
                         });
                 } else {
-                        console.log("no zip data");
                         alert("There is no data regarding this state's ZIP code boundries");
                 }
                 //add an event listener for clicks - for now all this does is display the zip code in a popup
@@ -127,9 +122,6 @@ define([
                 }
                 //create the markers
 				markers.init(toDisplay,totalStudents);
-				console.log(response.state);
-				
-				console.log(totalStudents);
         		resultsPane.update(regionSchools,totalStudents);
 
                 //display the zipcode for the given out line and throw down markers for the map

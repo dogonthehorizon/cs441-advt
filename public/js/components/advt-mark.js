@@ -122,7 +122,6 @@ define([
                         		studentTotal = total;
                         	}
                         	resultsPane.update(regionSchools,studentTotal);
-                        	console.log(studentTotal);
                            // alert(this.customInfo.name);
                         });
 
@@ -161,8 +160,6 @@ define([
 				{
 					data.highschools[i].newaddress = data.highschools[i].name +" " + data.city+ ", " + data.state + " " + data.highschools[i].zip;
 				}
-				
-				console.log(data.highschools[i].newaddress);
             }//for
              // Loop through and create all the markers.
             for (var i = 0; i < data.highschools.length; i++) {

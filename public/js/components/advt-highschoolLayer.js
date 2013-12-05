@@ -26,7 +26,6 @@ define(['Constants'], function(constants) {
 changeState = function(state) {
 	
 	state = "State IN ('"+state+"')";
-	//console.log(state);
 	this.FTLayer.setOptions({
 				query: {
       			select: 'Address', 
@@ -73,7 +72,6 @@ var changeCity = function(zip) {
 		});
 			
 		this.FTLayer.setMap(constants.MAP);
-		console.log(this.FTLayer);
 };
 /* abbreviation(state)
  *
