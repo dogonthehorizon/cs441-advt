@@ -1,3 +1,4 @@
+
 /**
  * advtZipLayer.js
  *
@@ -248,4 +249,5 @@ return {
                 changeState: changeState,
                 zipLayer : zipLayer
    };
+
 });
