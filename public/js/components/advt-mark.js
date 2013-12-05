@@ -85,7 +85,7 @@ define([
                         	console.log(this.customInfo);
                         	regionSchools =[];
                         	regionSchools.push(this.customInfo);
-                        	resultsPane.update(regionSchools);
+                        	resultsPane.update(regionSchools,0);
                            // alert(this.customInfo.name);
                         });
 

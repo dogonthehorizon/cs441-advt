@@ -28,7 +28,7 @@ define([
          * @author Fernando Freire
          * @since 02 Dec. 2013
          */
-        update: function(results) {
+        update: function(results, totalStudents) {
 
             $resultsPane.empty();
 
@@ -50,5 +50,5 @@ define([
                 $resultsPane.append($div);
             });
         }
-    }
+    };
 });

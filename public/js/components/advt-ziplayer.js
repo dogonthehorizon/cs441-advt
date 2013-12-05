@@ -20,7 +20,7 @@ define([
 ], function($, constants, highschoolLayer, markers, resultsPane) {
 
 
-
+ var totalStudents;
 /**
  *  changeState(state)
  *
@@ -105,6 +105,11 @@ define([
                 
                 var information = displayedArea.row['ZipCodeArea'].value;
         		var regionSchools = [];
+        		
+        		//creating a JSON to help create all the markers that
+        		//will be displayed on the map
+        		var toDisplay={};
+        		toDisplay.highschools = [];
                 for(var i = 0; i < response.length; i++)
                 {
                         if(information === response[i].zip)
@@ -113,14 +118,17 @@ define([
                        // EACH response[i] is a highschool object that should be
                        // displayed
                           regionSchools.push(response[i]);
+                          // also push the highschoools that need to get displayed
+                          toDisplay.highschools.push(response[i]);
                         }
                 }
-
-        		resultsPane.update(regionSchools);
+                //create the markers
+				markers.init(toDisplay);
+				console.log(totalStudents);
+        		resultsPane.update(regionSchools,totalStudents);
 
                 //display the zipcode for the given out line and throw down markers for the map
                 displayedArea.infoWindowHtml ="ZIP Code: " + information;
-                console.log("i got it");
                 var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer);
                 highschoolLayer.changeCity.call(highSchoolLayer, information);
           });
@@ -140,7 +148,7 @@ define([
 
                 var allZips = [];
                 var studentsInZipCodes = [];
-                
+                totalStudents = 0;
                 //a simple helper function to help us check if we've added a zip
                 //code already
                 var contains = function(array, item) {
@@ -154,8 +162,7 @@ define([
 
                 //go through our list of schools and scrubb the zip code from the address section
                 for (var i = 0; i < schools.length; i++) {
-                        var lastDigit = schools[i].address.length;
-                        var firstDigit = lastDigit - 5;
+                       
                       //  var scrubbed = schools[i].address.substr(firstDigit, 5);
                       var scrubbed = schools[i].zip;
      
@@ -164,13 +171,14 @@ define([
                                 allZips.push(scrubbed);
                             
                                 studentsInZipCodes.push(schools[i].students);
-                                
+                                totalStudents += schools[i].students;
                         } else {
                         		 var index = allZips.indexOf(scrubbed);
                                 studentsInZipCodes[index] += schools[i].students;
+                                totalStudents += schools[i].students;
                         }
                 }
-				
+				console.log(totalStudents);
                 var sortedZips = sortZips(studentsInZipCodes,allZips);
 
                 return sortedZips;

@@ -8,7 +8,7 @@
  * @since 11/26/13
  */
 
-define(['Constants','jquery'], function(constants,$) {
+define(['Constants'], function(constants) {
 
 
 
@@ -57,10 +57,11 @@ var changeCity = function(zip) {
      		    where: zipWhere
 		        },styles: [{
   				markerOptions: {
-   				 		iconName: "large_green"
+   				 		iconName: "large_red"
   						}
 				}]	
 	});
+	
 	 google.maps.event.addListener(this.FTLayer, 'click',function(displayedArea) {
 			// Get the necessary information from the clicked area
 

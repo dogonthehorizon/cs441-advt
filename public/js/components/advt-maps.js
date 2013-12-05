@@ -38,7 +38,7 @@ define(['jquery',
 	//setting up the zip code layer
 	var zipLayer = new advtZipLayer.zipLayer(new google.maps.FusionTablesLayer, "zipEID", constants.MAP);
 
-	zipLayer.FTLayer.setMap(constants.MAP);
+	//zipLayer.FTLayer.setMap(constants.MAP);
 	//add an event listener for clicks - for now all this does is display the zip code in a popup
 
 
