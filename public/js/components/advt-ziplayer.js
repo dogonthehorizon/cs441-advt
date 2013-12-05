@@ -41,9 +41,10 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
 
                 //make sure we have the zip code data for the state we're searching in
                 if (newEID != undefined) {
-                        var zips = scrubZips(schools);
+                	console.log(response);
+                	console.log(response[0].zip);
+                        var zips = scrubZips(response);
 
-                        
                         //switch the table we're using to that of the new state and
                         //display the zip code areas at different colors based upon the number of students
                         // number of students (determined by which zip array they are in)
@@ -146,17 +147,23 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
                 for (var i = 0; i < schools.length; i++) {
                         var lastDigit = schools[i].address.length;
                         var firstDigit = lastDigit - 5;
-                        var scrubbed = schools[i].address.substr(firstDigit, 5);
+                      //  var scrubbed = schools[i].address.substr(firstDigit, 5);
+                      var scrubbed = schools[i].zip;
+     
                         //keep track of all the zip codes and the number of students in each
                         if (!contains(allZips, scrubbed)) {
                                 allZips.push(scrubbed);
-                                studentsInZipCodes[scrubbed] = schools[i].students;
+                            
+                                studentsInZipCodes.push(schools[i].students);
+                                
+                                
                         } else {
-                                studentsInZipCodes[scrubbed] += schools[i].students;
+                        		 var index = allZips.indexOf(scrubbed);
+                                studentsInZipCodes[index] += schools[i].students;
                         }
                 }
-
-                var sortedZips = sortZips(studentsInZipCodes);
+				
+                var sortedZips = sortZips(studentsInZipCodes,allZips);
                 return sortedZips;
         };
 
@@ -167,21 +174,27 @@ var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.Fusion
          * 
          * @return 4 arrays of zips sorted by number of students
          */
-        var sortZips = function(zips) {
+        var sortZips = function(zips,numZips) {
                 var zip0 = [];
                 var zip1 = [];
                 var zip2 = [];
                 var zip3 = [];
 
                 for (var i = 0; i < zips.length; i++) {
+                	console.log(zips);
                         if (zips[i] > 20) {
-                                zip3.push(i);
+                                zip3.push(numZips[i]);
                         } else if (zips[i] > 10) {
-                                zip2.push(i);
+                        	
+                                zip2.push(numZips[i]);
                         } else if (zips[i] > 5) {
-                                zip1.push(i);
+                        		
+                        		
+                                zip1.push(numZips[i]);
+                                console.log(numZips[i]);
                         } else if (zips[i] > 0) {
-                                zip0.push(i);
+                        	
+                                zip0.push(numZips[i]);
                         }
                 }
                 return {

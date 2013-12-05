@@ -108,6 +108,7 @@ define([
             				{
             					zips.push(data.rows[i][0]);
             				}
+            				console.log(zips);
             				// time to pick out the actual zips
             				getRightZips.getRightZips(zips,response,city);
             			});
