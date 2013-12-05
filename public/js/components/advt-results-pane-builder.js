@@ -43,7 +43,8 @@ define([
 
             if(results.length <= 0) {
                 var $p = $("<p>We do not have zip code data for the State you are searching for. " +
-                    "We are placing down all highschool markers at once. This may take a while. </p>");
+                    "We are placing down all highschool markers at once. This may take a while. "+
+                    "To view information click on a marker. </p>");
 
                 $resultsPane.append($p);
             }

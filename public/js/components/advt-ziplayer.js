@@ -56,7 +56,7 @@ define([
                                 query : {
                                         from : this.eID,
                                 },
-
+								suppressInfoWindows:true,
                                 styles : [{
                                         polygonOptions : {
 
@@ -133,7 +133,8 @@ define([
         		resultsPane.update(regionSchools,totalStudents);
 
                 //display the zipcode for the given out line and throw down markers for the map
-                displayedArea.infoWindowHtml ="ZIP Code: " + information;
+               // displayedArea.infoWindowHtml ="ZIP Code: " + information;
+               // displayedArea.infowindow.close();
                
           });
 
