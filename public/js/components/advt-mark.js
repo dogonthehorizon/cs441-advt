@@ -84,17 +84,17 @@ define([
          * @param map
          */
         
-        'init' : function(data) {
+        'init' : function(data,total) {
         	studentTotal = 0;
         	getTotalStudents(data);
-        	console.log(studentTotal);
+        	
             var Geocoder = new google.maps.Geocoder();
             //remove all the old markers on the screen;
          	
             // Function that creates a marker on each specific address.
             var createMarkers = function(highschool, map) {
 				
-				console.log(highschool.name);
+				
                 // Geocode and create marker.
                 Geocoder.geocode({
 
@@ -114,10 +114,15 @@ define([
                         // Add a listener so we can check out sweet info.
                         google.maps.event.addListener(Marker, 'click', function() {
                         	//Fernando you can populat a window with this data
-                        	console.log(this.customInfo);
+                        	
                         	regionSchools =[];
                         	regionSchools.push(this.customInfo);
-                        	resultsPane.update(regionSchools,0);
+                        	if(total>0)
+                        	{
+                        		studentTotal = total;
+                        	}
+                        	resultsPane.update(regionSchools,studentTotal);
+                        	console.log(studentTotal);
                            // alert(this.customInfo.name);
                         });
 
@@ -127,7 +132,7 @@ define([
                         // We tried to geocode too many addresses in a second. :(
                         if(status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
                         	// if we are making to many queries slow it down a bit
-                            console.log("your search is causing a lot of pings to google. wait one moment please");
+                         
                            var timeOutFunc = setTimeout(function(){createMarkers(highschool,constants.MAP);},3000);
                          timeOutFunctions.push(timeOutFunc);
                         }
@@ -145,19 +150,19 @@ define([
 
 			// clean up the addresses
 			 for (var i = 0; i < data.highschools.length; i++) {
-
-                var length = data.highschools[i].address.length;
 				
-				var address = data.highschools[i].address.substring(0,length-5);
+				//depending on the information we may not have proper zip codes
+				//if we don't then just use the city and state to find the address
+				if(data.highschools[i].zip === undefined)
+				{
+					data.highschools[i].newaddress = data.highschools[i].name +" " + data.city+ ", " + data.state;
+				}
+				else
+				{
+					data.highschools[i].newaddress = data.highschools[i].name +" " + data.city+ ", " + data.state + " " + data.highschools[i].zip;
+				}
 				
-				address = data.highschools[i].name +" "+ address;
-				
-				data.highschools[i].address = address+" "+data.highschools[i].zip;
-				data.highschools[i].newaddress = data.highschools[i].name + " " + data.state + " " + data.highschools[i].zip;
-				console.log("hey Listen");
-				console.log(data.highschools[i].address);
-				
-
+				console.log(data.highschools[i].newaddress);
             }//for
              // Loop through and create all the markers.
             for (var i = 0; i < data.highschools.length; i++) {

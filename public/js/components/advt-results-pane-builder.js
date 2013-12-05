@@ -33,8 +33,8 @@ define([
             $resultsPane.empty();
 
             if(results.length <= 0) {
-                var $p = $("<p>We do not have sufficient data to complete your search. " +
-                    "Making a best approximation of the data requested. </p>");
+                var $p = $("<p>We do not have zip code data for the State you are searching for. " +
+                    "We are placing down all highschool markers at once. This may take a while. </p>");
 
                 $resultsPane.append($p);
             }

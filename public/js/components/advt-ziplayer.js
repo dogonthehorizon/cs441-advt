@@ -112,6 +112,7 @@ define([
         		var toDisplay={};
         		toDisplay.highschools = [];
         		toDisplay.state = response.state;
+        		toDisplay.city = response.city;
                 for(var i = 0; i < response.length; i++)
                 {
                         if(information === response[i].zip)
@@ -125,7 +126,9 @@ define([
                         }
                 }
                 //create the markers
-				markers.init(toDisplay);
+				markers.init(toDisplay,totalStudents);
+				console.log(response.state);
+				
 				console.log(totalStudents);
         		resultsPane.update(regionSchools,totalStudents);
 
@@ -179,7 +182,7 @@ define([
                                 totalStudents += schools[i].students;
                         }
                 }
-				console.log(totalStudents);
+			
                 var sortedZips = sortZips(studentsInZipCodes,allZips);
 
                 return sortedZips;
@@ -202,7 +205,7 @@ define([
 
                 for (var i = 0; i < zips.length; i++) {
 
-                	console.log(zips);
+                	
                         if (zips[i] > 20) {
                                 zip3.push(numZips[i]);
                         } else if (zips[i] > 10) {
@@ -211,7 +214,7 @@ define([
                         } else if (zips[i] > 5) {
                         		
                                 zip1.push(numZips[i]);
-                                console.log(numZips[i]);
+                                
                         } else if (zips[i] > 0) {
                         	
                                 zip0.push(numZips[i]);

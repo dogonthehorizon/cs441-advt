@@ -126,7 +126,7 @@ define([
            		 	 maps.setCenter("",response.state);
             		var whereString = "State IN (";
 						var temp ="";
-						console.log($('#advt-state-select').val());
+					
 						var TABLE_ID = '1rYG3k8Ac7mo2thTVcMm5fgRLwP9uCnQTmyRcEtQ';
 						whereString = whereString +"'"+$('#advt-state-select').val()+"') ";
 						var key = "&key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw";
@@ -134,7 +134,7 @@ define([
                             + TABLE_ID + " WHERE ";
         				reqString = reqString + whereString + key;
             			$.get(reqString,function(data){
-            				console.log(data);
+            			
             				var zips = [];
             				for(var i = 0; i < data.rows.length; i++)
             				{

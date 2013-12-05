@@ -74,6 +74,8 @@ define([
             		}
             	}
             }
+             newResponse.state = response.state;
+             newResponse.city = response.city;
             advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val(),response.highschools,realZips,newResponse);
             
         });
@@ -121,7 +123,7 @@ define([
             		
             		if(names[i].toLowerCase() === response.highschools[v].name.toLowerCase())
             		{
-            			console.log(zips);
+            			
             			//attach the real zip to the school
             			response.highschools[v].zip = zips[i];
             			//push the new confirmed response onto the array of new responses
@@ -132,6 +134,8 @@ define([
             	}
             }
             newResponse.state = response.state;
+            newResponse.city = response.city;
+          
             //we can finally create the layer
             advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val(),response.highschools,realZips,newResponse);
     
