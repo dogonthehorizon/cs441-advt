@@ -61,8 +61,10 @@ define([
             {
             	for(var v = 0; v < response.highschools.length; v++)
             	{
-            		if(names[i] === response.highschools[v].name)
+            		
+            		if(names[i].toLowerCase() === response.highschools[v].name.toLowerCase())
             		{
+            			
             			//attach the real zip to the school
             			response.highschools[v].zip = zips[i];
             			//push the new confirmed response onto the array of new responses
@@ -73,9 +75,7 @@ define([
             	}
             }
             advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val(),response.highschools,realZips,newResponse);
-            console.log(realZips);
-            console.log(zips);
-            console.log(names);
+            
         });
 		
 	};
@@ -114,12 +114,14 @@ define([
             // once an actual highschool is found grab its zip and start building an array
             // of legitimate zipcodes
             // also creating a new list of responses to match what should be in state
-            for( var i = 0; i< names.length; i++)
+           for( var i = 0; i< names.length; i++)
             {
             	for(var v = 0; v < response.highschools.length; v++)
             	{
-            		if(names[i] === response.highschools[v].name)
+            		
+            		if(names[i].toLowerCase() === response.highschools[v].name.toLowerCase())
             		{
+            			
             			//attach the real zip to the school
             			response.highschools[v].zip = zips[i];
             			//push the new confirmed response onto the array of new responses
