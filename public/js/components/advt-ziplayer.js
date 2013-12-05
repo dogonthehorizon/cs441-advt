@@ -47,7 +47,7 @@ define([
 
                 	
                     var zips = scrubZips(response);
-					console.log(zips);
+				
 
                         //switch the table we're using to that of the new state and
                         //display the zip code areas at different colors based upon the number of students
@@ -105,11 +105,13 @@ define([
                 
                 var information = displayedArea.row['ZipCodeArea'].value;
         		var regionSchools = [];
+        		markers.removeMarkers();
         		
         		//creating a JSON to help create all the markers that
         		//will be displayed on the map
         		var toDisplay={};
         		toDisplay.highschools = [];
+        		toDisplay.state = response.state;
                 for(var i = 0; i < response.length; i++)
                 {
                         if(information === response[i].zip)
@@ -129,8 +131,7 @@ define([
 
                 //display the zipcode for the given out line and throw down markers for the map
                 displayedArea.infoWindowHtml ="ZIP Code: " + information;
-                var highSchoolLayer = new highschoolLayer.highSchoolLayer(new google.maps.FusionTablesLayer);
-                highschoolLayer.changeCity.call(highSchoolLayer, information);
+               
           });
 
                 this.FTLayer.setMap(constants.MAP);
@@ -163,7 +164,7 @@ define([
                 //go through our list of schools and scrubb the zip code from the address section
                 for (var i = 0; i < schools.length; i++) {
                        
-                      //  var scrubbed = schools[i].address.substr(firstDigit, 5);
+         
                       var scrubbed = schools[i].zip;
      
                         //keep track of all the zip codes and the number of students in each

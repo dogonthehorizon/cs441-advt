@@ -17,6 +17,37 @@ define([
 	], function($,constants,resultsPane) {
 
 	var schoolInfo = [];
+	var markers = [];
+	var timeOutFunctions =[];
+	var studentTotal = 0;
+	var removeMarkers = function()
+	{
+		if(markers.length>0)
+         	{
+         		for(var i = 0; i < markers.length; i++)
+         		{
+         			markers[i].setMap(null);
+         		}
+         		markers = [];
+         	}
+	};
+	var clearTimeOuts = function()
+	{
+		for (var i=0;i<timeOutFunctions.length;i++)
+			{ 
+					clearTimeout(timeOutFunctions[i]);
+			}
+	};
+	var getTotalStudents = function(data)
+	{
+		for (var i = 0; i < data.highschools.length; i++) {
+				
+               studentTotal += data.highschools[i].students;
+
+            }//for
+		
+	};
+	
 /*
  * 
  * @param state: check to see if we have data for a state return good if yes
@@ -40,9 +71,6 @@ define([
 		return stateAbrv[state];
 };
 
-
-		
-	
     return {
 
         /**
@@ -50,16 +78,19 @@ define([
          *
          * TODO: function definition goes here.
          *
-         * @author Sam Golloway, Carl Lulay
+         * @author Sam Golloway
          *
          * @param data
          * @param map
          */
         
         'init' : function(data) {
-        	
+        	studentTotal = 0;
+        	getTotalStudents(data);
+        	console.log(studentTotal);
             var Geocoder = new google.maps.Geocoder();
-         
+            //remove all the old markers on the screen;
+         	
             // Function that creates a marker on each specific address.
             var createMarkers = function(highschool, map) {
 				
@@ -78,6 +109,7 @@ define([
                             customInfo : highschool
                             
                         });
+                        markers.push(Marker);
 
                         // Add a listener so we can check out sweet info.
                         google.maps.event.addListener(Marker, 'click', function() {
@@ -96,7 +128,8 @@ define([
                         if(status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
                         	// if we are making to many queries slow it down a bit
                             console.log("your search is causing a lot of pings to google. wait one moment please");
-                          setTimeout(function(){createMarkers(highschool,constants.MAP);},3000);
+                           var timeOutFunc = setTimeout(function(){createMarkers(highschool,constants.MAP);},3000);
+                         timeOutFunctions.push(timeOutFunc);
                         }
                         else {
                             alert('Geocode was not successful for the following reason: ' + status);
@@ -119,7 +152,10 @@ define([
 				
 				address = data.highschools[i].name +" "+ address;
 				
-				data.highschools[i].newaddress = address;
+				data.highschools[i].address = address+" "+data.highschools[i].zip;
+				data.highschools[i].newaddress = data.highschools[i].name + " " + data.state + " " + data.highschools[i].zip;
+				console.log("hey Listen");
+				console.log(data.highschools[i].address);
 				
 
             }//for
@@ -133,7 +169,10 @@ define([
         },//init
 
         isAllowed:isAllowed,
-        schoolInfo:schoolInfo
+        schoolInfo:schoolInfo,
+        timeOutFunctions:timeOutFunctions,
+        removeMarkers:removeMarkers,
+        clearTimeOuts:clearTimeOuts
 
 
     };

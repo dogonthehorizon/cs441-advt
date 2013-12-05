@@ -77,17 +77,24 @@ define([
                     response.highschools.push({name: curName, address: data.rows[i][3], students: 1});
                 }
             }
-        
+            //clean up the map before a search
+        	//if there is a querry still on going kill it
+        	markers.clearTimeOuts();
+        	markers.removeMarkers();
+        	
+        	
         	// make sure that the state is in the list of states we have accurate data for
-			if(markers.isAllowed($('#advt-state-select').val())!="good" )
+			if(markers.isAllowed(response.state)!="good" )
             {
                 resultsPane.update([]);
+                maps.setCenter(response.city,response.state);
             	markers.init(response);
             }
             else
             {
+            	maps.setCenter(response.city,response.state);
             	//grab the city they searched for
-            	var city = util.toTitleCase($('#advt-city-input').val());
+            	var city = util.toTitleCase(response.city);
             	// make a querry for all possible zips in that city
             	if(city != "")
             	{
@@ -116,6 +123,7 @@ define([
            		 }
             	else
            		 {
+           		 	 maps.setCenter("",response.state);
             		var whereString = "State IN (";
 						var temp ="";
 						console.log($('#advt-state-select').val());

@@ -19,7 +19,7 @@ define([
     'components/advt-maps',
 ], function($, markers, advtZipLayer, maps) {
 	
-	                                   
+	                          
 /**
  * getRightZips
  * Description: gets the proper zips if a particular city was searched for
@@ -121,7 +121,7 @@ define([
             		
             		if(names[i].toLowerCase() === response.highschools[v].name.toLowerCase())
             		{
-            			
+            			console.log(zips);
             			//attach the real zip to the school
             			response.highschools[v].zip = zips[i];
             			//push the new confirmed response onto the array of new responses
@@ -131,6 +131,7 @@ define([
             		}
             	}
             }
+            newResponse.state = response.state;
             //we can finally create the layer
             advtZipLayer.changeState.call(maps.zipLayer, $('#advt-state-select').val(),response.highschools,realZips,newResponse);
     
