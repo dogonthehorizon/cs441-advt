@@ -46,31 +46,14 @@ changeState = function(state) {
  */
 var changeCity = function(zip) {
 	
-	console.log("i want to hang out too guys");
-	console.log(zip);
-	
+	var whereString = "HighSchool IN (";
 	var temp ="";
-	var zipWhere = "Zip IN ('"+zip+"')";
-	
-		var whereString = "Zip IN (";
-		var temp ="";
-						
-		var TABLE_ID = '1dbdd9haZtt2nt3OHsm1qW8bMmIMob24rJ709ErI';
-		whereString = whereString +"'"+zip+"')";
-		var key = "&key=AIzaSyCIo1yWHMMSCRsr_JZ_UyuJiHZAKZ1jsxw";
-		// select from the highschool
-		var reqString = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT Address FROM "
-                            + TABLE_ID + " WHERE ";
-            reqString = reqString+whereString+key;
-        $.get(reqString,function(data){console.log(data);});
-	
-	
-	
+	zipWhere = "Zip IN ('"+zip+"')";
 	
 	this.FTLayer.setOptions({
 				query: {
       			select: 'Address', 
-     		    from: '1dbdd9haZtt2nt3OHsm1qW8bMmIMob24rJ709ErI',
+     		    from: '1rYG3k8Ac7mo2thTVcMm5fgRLwP9uCnQTmyRcEtQ',
      		    where: zipWhere
 		        },styles: [{
   				markerOptions: {
@@ -78,7 +61,6 @@ var changeCity = function(zip) {
   						}
 				}]	
 	});
-	this.FTLayer.setMap(constants.MAP);
 	 google.maps.event.addListener(this.FTLayer, 'click',function(displayedArea) {
 			// Get the necessary information from the clicked area
 
@@ -89,7 +71,8 @@ var changeCity = function(zip) {
 		
 		});
 			
-		
+		this.FTLayer.setMap(constants.MAP);
+		console.log(this.FTLayer);
 };
 /* abbreviation(state)
  *
