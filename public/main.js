@@ -26,7 +26,7 @@ require.config({
             deps: ['foundation']
         },
         'jquery-ui': {
-            deps: ['jquery']
+            deps: 'jquery'
         }
     }
 });
