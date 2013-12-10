@@ -18,15 +18,15 @@ require.config({
         'foundation-forms':'foundation/foundation.forms'
     },
     shim: {
+        'jquery-ui': {
+            deps: ['jquery']
+        },
         foundation: {
             exports: 'Foundation',
             deps: ['jquery']
         },
         'foundation-forms': {
             deps: ['foundation']
-        },
-        'jquery-ui': {
-            deps: 'jquery'
         }
     }
 });
